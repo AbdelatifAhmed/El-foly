@@ -2,16 +2,7 @@
 import { Eye, Heart } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-export type CardType = {
-    id?: string;
-    title: string;
-    price: number;
-    image: string;
-    isNew?: boolean;
-    vocher?: string;
-    rating?: number;
-    ratingCount?: number;
-};
+import { CardType } from "../lib/types";
 
 const Card = ({ title, price, image, isNew, vocher, rating, ratingCount }: CardType) => {
     const [isLiked, setIsLiked] = useState(false);

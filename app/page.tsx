@@ -1,39 +1,43 @@
-import Card from "@/components/card";
-import CardSlider from "@/components/cardSlider";
-import FlashCounter from "@/components/flashCounter";
-import SliderCategory from "@/components/sliderCategory";
-import Carousel from "@/UI/carousel";
-import Footer from "@/UI/footer";
-
+import SliderCategory from "@/components/sections/sliderCategorySec";
+import Carousel from "@/components/sections/carouselSec";
+import TodayImageSwiper from "@/components/sections/todayImageSwiperSec";
+import BestSellingSec from "@/components/sections/BestSellingSec";
+import OurProductSec from "@/components/sections/OurProductSec";
+import Services from "@/components/common/services";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       {/* Hero */}
-    <section className="mt-30 px-32">
-      <Carousel />
-    </section>
-    {/* Categories */}
-    <section className="px-32">
-      <div className="mt-5">
-        <p className="title-line">Categories</p>
-        <SliderCategory />
-      </div> 
-    </section>
-    {/* Flash Sales */}
-    <section className="px-32">
-      <div className="mt-5">
-        <p className="title-line">Today&apos;s</p>
-        <div className="flex justify-between items-center mb-5">
-        <p className="head-line">Falsh sales</p>
-        <FlashCounter />
+      <section className="mt-30 px-40">
+        <Carousel />
+      </section>
+      {/* Categories */}
+      <section className="px-40">
+        <div className="mt-5">
+          <p className="title-line">Categories</p>
+          <SliderCategory />
         </div>
-    
-        <CardSlider />
-      
-      </div> 
-    </section>
-    <Footer />
-    
+      </section>
+      {/* Today's Flash Sales */}
+      <section className="px-40">
+        <TodayImageSwiper />
+      </section>
+
+      <section>
+       
+      </section>
+      {/* Best Selling Products */}
+      <section className="px-40 mb-5">
+        <BestSellingSec />
+      </section>
+      {/* Our Products */}
+      <section className=" px-40 mb-5">
+        <OurProductSec />
+      </section>
+
+      <section className="px-40">
+        <Services />
+      </section>
     </main>
   );
 }

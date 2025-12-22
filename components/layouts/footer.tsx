@@ -3,8 +3,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="mt-20">
-      <footer className="footer sm:footer-horizontal bg-base-300 text-base p-10 ">
+    <>
+      <div className="footer sm:footer-horizontal bg-base-300 text-base p-10 ">
         <div className="flex items-center justify-center">
             <Image
               src="/images/elfoly-logo.svg"
@@ -65,16 +65,16 @@ const Footer = () => {
             </a>
           </div>
         </nav>
-      </footer>
-      <footer className="footer footer-horizontal footer-center bg-[var(--secondary-color)] text-white border-base-300  px-10 py-4">
+      </div>
+      <div className="footer footer-horizontal footer-center bg-[var(--secondary-color)] text-white border-base-300  px-10 py-4">
         <aside>
           <p>
             Copyright © {new Date().getFullYear()} - All right reserved by ACME
             Industries Ltd
           </p>
         </aside>
-      </footer>
-    </div>
+      </div>
+    </>
   );
 };
 

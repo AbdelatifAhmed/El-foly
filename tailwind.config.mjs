@@ -7,7 +7,13 @@ const config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        roboto: ['var(--font-roboto)'],
+        poppins: ['var(--font-poppins)'],
+        inter: ['var(--font-inter)'],
+      },
+    },
   },
   plugins: [daisyui],
 };

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
   return (
-    <nav className="navbar bg-base-100 flex justify-between items-center fixed top-0 left-0 right-0 w-full z-50 px-32">
+    <nav className="navbar  flex bg-white/50 backdrop-blur-2xl  justify-between items-center fixed top-0 left-0 right-0 w-full z-50 px-32">
       <div className="pl-2">
         <div className="dropdown hidden">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -43,7 +43,12 @@ const Navbar = () => {
         </div>
         <div>
           <Link href={"/"} className="cursor-pointer">
-            <Image src="/images/elfoly-logo.svg" alt="Logo" width={80} height={80} />
+            <Image
+              src="/images/elfoly-logo.svg"
+              alt="Logo"
+              width={80}
+              height={80}
+            />
           </Link>
         </div>
       </div>
@@ -79,9 +84,9 @@ const Navbar = () => {
         </li>
         <li>
           <Link
-            href="/contact"
+            href="/signup"
             className={`navbar-text ${
-              pathname === "/contact" ? "active-link" : ""
+              pathname === "/signup" ? "active-link" : ""
             }`}
           >
             Sign Up
@@ -95,7 +100,7 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="what are you looking for?"
-            className="input input-bordered input-sm w-24 md:w-auto bg-base-300"
+            className="input input-bordered input-sm w-24 md:w-auto"
           />
           <div className="badge badge-xl badge-soft px-2 rounded-full">
             <svg
@@ -117,19 +122,29 @@ const Navbar = () => {
         </div>
         {/* wishlist */}
         <div className="flex items-center gap-1">
-          <Image src='/icons/heart.svg' alt='Cart' width={24} height={24} />
+          <Image src="/icons/heart.svg" alt="Cart" width={24} height={24} />
           <span className="text-lg text-bold">wishList</span>
         </div>
         <div className="divider divider-horizontal"></div>
         {/* cart */}
         <div className="flex items-center justify-around gap-2">
-          <Image src='/icons/shopping-cart.svg' alt='Cart' width={24} height={24} />
+          <Image
+            src="/icons/shopping-cart.svg"
+            alt="Cart"
+            width={24}
+            height={24}
+          />
           <span className="text-lg text-bold">Cart</span>
         </div>
         <div className="divider divider-horizontal"></div>
         {/* user profile */}
         <div className=" items-center gap-1 flex ">
-          <Image src='/icons/user-circle-fill.svg' alt='Cart' width={30} height={30} />          
+          <Image
+            src="/icons/user-circle-fill.svg"
+            alt="Cart"
+            width={30}
+            height={30}
+          />
         </div>
       </div>
     </nav>
