@@ -1,10 +1,13 @@
 "use client";
+import { userIconList } from "@/constant/constants";
 import Image from "next/image";
 import Link from "next/link";
 
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 const Navbar = () => {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <nav className="navbar  flex bg-white/50 backdrop-blur-2xl  justify-between items-center fixed top-0 left-0 right-0 w-full z-50 px-32">
       <div className="pl-2">
@@ -138,13 +141,26 @@ const Navbar = () => {
         </div>
         <div className="divider divider-horizontal"></div>
         {/* user profile */}
-        <div className=" items-center gap-1 flex ">
+        <div className=" items-center gap-1 flex relative cursor-pointer "
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <Image
             src="/icons/user-circle-fill.svg"
             alt="Cart"
             width={30}
             height={30}
+            className=""
           />
+          <ul className={`p-5 ${isOpen ? "absolute" : "hidden"} top-full right-[50%] bg-linear-210 from-zinc-400 to-zinc-800 text-white text-xl  rounded-lg`}>
+            {userIconList.map((item) => (
+              <li key={item.id}>
+                <a className="flex items-center gap-10 p-2 hover:bg-white/20 rounded-lg group ">
+                  <item.icon className="group-hover:translate-x-1 transition-all duration-200 "/>
+                  <span className=" text-nowrap">{item.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </nav>

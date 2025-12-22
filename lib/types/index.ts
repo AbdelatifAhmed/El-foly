@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 // types/images.ts
 export interface ImageItem {
   id: string;
@@ -17,3 +19,9 @@ export type CardType = {
     rating?: number;
     ratingCount?: number;
 };
+
+export interface UserIcon {
+    id: number;
+    icon: LucideIcon;
+    title: string;
+}

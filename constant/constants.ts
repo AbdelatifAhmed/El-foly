@@ -1,4 +1,5 @@
-import { CardType } from "../lib/types/index";
+import { LogOut, ShoppingBasket, UserRoundPen } from "lucide-react";
+import { CardType, UserIcon } from "../lib/types/index";
 export  const templateImages : CardType[] = [
     {
       id: '1',
@@ -14,7 +15,7 @@ export  const templateImages : CardType[] = [
       id: '2',
       title : 'Sample Image 2',
        price: 150,
-       image: '/images/iphone-hero.png',
+       image: '/images/airpods.png',
        isNew: false,
        vocher: '10%',
        rating: 4.8,
@@ -24,7 +25,7 @@ export  const templateImages : CardType[] = [
       id: '3',
       title : 'Sample Image 3',
        price: 200,
-       image: '/images/iphone-hero.png',
+       image: '/images/headphones.png',
        isNew: true,
        vocher: '15%',
        rating: 4.2,
@@ -34,7 +35,7 @@ export  const templateImages : CardType[] = [
       id: '4',
       title : 'Sample Image 4',
        price: 250,
-       image: '/images/iphone-hero.png',
+       image: '/images/poco-pods.jpg',
        isNew: false,
        vocher: '20%',
        rating: 4.7,
@@ -173,4 +174,22 @@ export  const templateImages : CardType[] = [
        rating: 4.7,
        ratingCount: 110
     },
+   ];
+
+   export const userIconList : UserIcon[] = [
+      {
+         id: 1,
+         icon: UserRoundPen,
+         title: 'Profile'
+      },
+      {
+         id: 2,
+         icon: ShoppingBasket,
+         title: 'My Orders'
+      },
+      {
+         id: 3,
+         icon: LogOut,
+         title: 'Logout'
+      }
    ];
