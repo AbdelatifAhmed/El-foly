@@ -2,167 +2,134 @@
 import { userIconList } from "@/constant/constants";
 import Image from "next/image";
 import Link from "next/link";
-
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Search, Heart, ShoppingCart, Menu } from "lucide-react"; // استخدام أيقونات متناسقة
+
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
-    <nav className="navbar  flex bg-white/50 backdrop-blur-2xl  justify-between items-center fixed top-0 left-0 right-0 w-full z-50 px-32">
-      <div className="pl-2">
-        <div className="dropdown hidden">
+    // 1. تغيير px-32 إلى px-4 في الموبايل و px-32 في الشاشات الكبيرة
+    <nav className="navbar fixed top-0 left-0 right-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-gray-100 px-4 md:px-10 lg:px-32 transition-all">
+      
+      {/* --- الجزء الأيسر: Mobile Menu + Logo --- */}
+      <div className="navbar-start gap-2">
+        {/* زر المنيو للموبايل - يظهر فقط في lg:hidden */}
+        <div className="dropdown lg:hidden">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />{" "}
-            </svg>
+            <Menu className="h-6 w-6" />
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow-lg border border-gray-100"
           >
-            <li>
-              <a>Homepage</a>
-            </li>
-            <li>
-              <a>Portfolio</a>
-            </li>
-            <li>
-              <a>About</a>
-            </li>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/about">About</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/signup">Sign Up</Link></li>
           </ul>
         </div>
-        <div>
-          <Link href={"/"} className="cursor-pointer">
-            <Image
-              src="/images/elfoly-logo.svg"
-              alt="Logo"
-              width={80}
-              height={80}
-            />
-          </Link>
-        </div>
+
+        {/* Logo */}
+        <Link href="/" className="flex-shrink-0">
+          <Image
+            src="/images/elfoly-logo.svg"
+            alt="Logo"
+            width={60} 
+            height={60}
+            className="w-12 h-12 md:w-16 md:h-16"
+          />
+        </Link>
       </div>
 
-      <ul className="flex items-center gap-8 ">
-        <li>
-          <Link
-            href="/"
-            className={`navbar-text ${pathname === "/" ? "active-link" : ""}`}
-          >
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/about"
-            className={`navbar-text ${
-              pathname === "/about" ? "active-link" : ""
-            } `}
-          >
-            About
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/contact"
-            className={`navbar-text ${
-              pathname === "/contact" ? "active-link" : ""
-            }`}
-          >
-            Contact
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/signup"
-            className={`navbar-text ${
-              pathname === "/signup" ? "active-link" : ""
-            }`}
-          >
-            Sign Up
-          </Link>
-        </li>
-      </ul>
+      {/* --- الجزء الأوسط: Links (Desktop Only) --- */}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="flex items-center gap-8 font-medium">
+          <li>
+            <Link href="/" className={`hover:text-primary transition-colors ${pathname === "/" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className={`hover:text-primary transition-colors ${pathname === "/about" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+              About
+            </Link>
+          </li>
+          <li>
+            <Link href="/contact" className={`hover:text-primary transition-colors ${pathname === "/contact" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link href="/signup" className={`hover:text-primary transition-colors ${pathname === "/signup" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+              Sign Up
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div className="navbar-end gap-2 md:gap-4">
+  {/* 1. منطقة البحث - تأخذ المساحة المتاحة وتدفع الأيقونات لليمين */}
+  <div className="hidden sm:flex items-center relative flex-1 justify-end max-w-md">
+    <div className="relative w-full max-w-[280px]">
+      <input
+        type="text"
+        placeholder="What are you looking for?"
+        className="input input-bordered input-sm w-full rounded-full pl-10 bg-gray-50 focus:bg-white transition-all"
+      />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-1" />
+    </div>
+  </div>
 
-      <div className="flex justify-around items-center gap-2">
-        {/* search bar */}
-        <div className="flex gap-2 items-center">
-          <input
-            type="text"
-            placeholder="what are you looking for?"
-            className="input input-bordered input-sm w-24 md:w-auto"
+  <div className="flex items-center gap-1 md:gap-3 bg-gray-100/50 p-1 rounded-full px-2 md:px-4">
+    
+    {/* Wishlist */}
+    <div className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group">
+      <Heart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 group-hover:text-primary" />
+      <span className="badge badge-secondary badge-xs px-1 indicator-item">0</span>
+    </div>
+
+    {/* Cart */}
+    <div className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group">
+      <ShoppingCart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 group-hover:text-primary" />
+      <span className="badge badge-primary badge-xs px-1 indicator-item">3</span>
+    </div>
+
+    {/* divider */}
+    <div className="w-[1px] h-6 bg-gray-300 mx-1 hidden md:block"></div>
+
+    {/* Profile */}
+    <div className="relative">
+      <div 
+        className="avatar cursor-pointer hover:ring-2 ring-primary ring-offset-2 rounded-full transition-all"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full">
+          <Image 
+             src="/icons/user-circle-fill.svg" 
+             alt="User" 
+             width={40} 
+             height={40} 
           />
-          <div className="badge badge-xl badge-soft px-2 rounded-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />{" "}
-            </svg>
-          </div>
-        </div>
-        {/* wishlist */}
-        <div className="flex items-center gap-1">
-          <Image src="/icons/heart.svg" alt="Cart" width={24} height={24} />
-          <span className="text-lg text-bold">wishList</span>
-        </div>
-        <div className="divider divider-horizontal"></div>
-        {/* cart */}
-        <div className="flex items-center justify-around gap-2">
-          <Image
-            src="/icons/shopping-cart.svg"
-            alt="Cart"
-            width={24}
-            height={24}
-          />
-          <span className="text-lg text-bold">Cart</span>
-        </div>
-        <div className="divider divider-horizontal"></div>
-        {/* user profile */}
-        <div className=" items-center gap-1 flex relative cursor-pointer "
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <Image
-            src="/icons/user-circle-fill.svg"
-            alt="Cart"
-            width={30}
-            height={30}
-            className=""
-          />
-          <ul className={`p-5 ${isOpen ? "absolute" : "hidden"} top-full right-[50%] bg-linear-210 from-zinc-400 to-zinc-800 text-white text-xl  rounded-lg`}>
-            {userIconList.map((item) => (
-              <li key={item.id}>
-                <a className="flex items-center gap-10 p-2 hover:bg-white/20 rounded-lg group ">
-                  <item.icon className="group-hover:translate-x-1 transition-all duration-200 "/>
-                  <span className=" text-nowrap">{item.title}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
+      {isOpen && (
+            <ul className="absolute top-full right-0 mt-4 p-2 shadow-2xl bg-white border border-gray-100 rounded-xl w-56 z-[60] animate-in fade-in zoom-in duration-200">
+              {userIconList.map((item) => (
+                <li key={item.id} className="list-none">
+                  <a className={`flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg cursor-pointer group transition-colors
+                    ${item.title === "Logout" ? "text-red-500 hover:bg-red-50" : "text-gray-700"}`}>
+                    <item.icon className="w-5 h-5 group-hover:scale-110 transition-transform"/>
+                    <span className="text-sm font-medium">{item.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+    </div>
+  </div>
+</div>
     </nav>
   );
 };
