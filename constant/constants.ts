@@ -193,3 +193,8 @@ export  const templateImages : CardType[] = [
          title: 'Logout'
       }
    ];
+
+
+
+
+ 

@@ -3,6 +3,7 @@ import { Inter, Poppins, Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
 import Footer from "@/components/layouts/footer";
+import CartDrawer from "@/components/UI/CartDrawer";
 
 export const inter = Inter({
   variable: "--font-inter",
@@ -37,6 +38,7 @@ export default function RootLayout({
         className={`font-roboto antialiased flex min-h-screen flex-col `}
       >
         <Navbar />
+        <CartDrawer />
         {children}
       </body>
       <Footer />

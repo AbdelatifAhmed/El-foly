@@ -5,10 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Search, Heart, ShoppingCart, Menu } from "lucide-react"; // استخدام أيقونات متناسقة
-
+import { useCartStore } from "@/store/cart.store"; 
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { toggleCart, totalItems } = useCartStore();
+  const cartCount = totalItems();
 
   return (
     // 1. تغيير px-32 إلى px-4 في الموبايل و px-32 في الشاشات الكبيرة
@@ -91,9 +93,18 @@ const Navbar = () => {
     </div>
 
     {/* Cart */}
-    <div className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group">
-      <ShoppingCart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 group-hover:text-primary" />
-      <span className="badge badge-primary badge-xs px-1 indicator-item">3</span>
+    <div 
+      className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group relative"
+      onClick={toggleCart} // إضافة حدث فتح القائمة عند الضغط
+    >
+      <ShoppingCart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 group-hover:text-primary transition-colors" />
+      
+      {/* عرض الشارة (Badge) فقط إذا كان هناك منتجات في السلة */}
+      {cartCount > 0 && (
+        <span className="badge badge-primary badge-xs indicator-item animate-bounce font-bold">
+          {cartCount}
+        </span>
+      )}
     </div>
 
     {/* divider */}

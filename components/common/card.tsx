@@ -6,6 +6,7 @@ import { CardType } from "@/lib/types";
 
 const Card = ({ title, price, image, isNew, vocher, rating, ratingCount }: CardType) => {
     const [isLiked, setIsLiked] = useState(false);
+    
   return (
     <div className="card card-lg bg-base-100 w-96 shadow-sm  static">
         <figure className="relative group bg-slate-100 w-full h-64 overflow-hidden">
@@ -16,7 +17,9 @@ const Card = ({ title, price, image, isNew, vocher, rating, ratingCount }: CardT
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
             />
-        <div className="card-actions w-full h-12 p-2 bg-[var(--secondary-color)] text-white text-xl hidden group-hover:flex justify-center items-center absolute bottom-0 left-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out group-hover:cursor-pointer">
+        <div
+        onClick={} 
+        className="card-actions w-full h-12 p-2 bg-[var(--secondary-color)] text-white text-xl hidden group-hover:flex justify-center items-center absolute bottom-0 left-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out group-hover:cursor-pointer">
                     Add to cart
         </div>
         <div className="absolute top-2 right-2 flex flex-col gap-3 ">
