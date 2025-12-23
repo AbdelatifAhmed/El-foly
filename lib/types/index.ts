@@ -2,7 +2,7 @@ import { LucideIcon } from "lucide-react";
 
 // types/images.ts
 export interface ImageItem {
-  id: string;
+  id: number;
   src: string;
   alt: string;
   title?: string;
@@ -10,12 +10,12 @@ export interface ImageItem {
 }
 
 export type CardType = {
-  id?: string;
+  id:  number;
   title: string;
   price: number;
   image: string;
   isNew?: boolean;
-  vocher?: string;
+  vocher?: number;
   rating?: number;
   ratingCount?: number;
 };
@@ -27,7 +27,7 @@ export interface UserIcon {
 }
 
 export interface CartItem {
-  id: number;
+  id: number ;
   title: string;
   price: number;
   image: string;

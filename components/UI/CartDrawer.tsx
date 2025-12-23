@@ -18,20 +18,18 @@ const CartDrawer = () => {
   if (!isOpen) return null;
 
   return (
-    // الحاوية الرئيسية: تغطي الشاشة بالكامل وتتحكم في الـ Z-Index
+   
     <div className="fixed inset-0 z-[100] flex justify-end">
       
-      {/* الخلفية المعتمة (Overlay) - تغلق القائمة عند الضغط عليها */}
+     
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity animate-in fade-in duration-300"
         onClick={toggleCart}
         aria-hidden="true"
       ></div>
 
-      {/* جسم القائمة الجانبية - ينزلق من اليمين */}
       <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
         
-        {/* 1. رأس القائمة (Header) */}
         <div className="flex items-center justify-between p-4 border-b border-gray-100">
           <h2 className="text-lg font-semibold flex items-center gap-2 text-gray-800">
             <ShoppingCart className="w-5 h-5 text-primary" />
@@ -45,19 +43,16 @@ const CartDrawer = () => {
           </button>
         </div>
 
-        {/* 2. جسم القائمة (قائمة المنتجات) */}
         <div className="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
           {cartItems.length === 0 ? (
-            // حالة السلة الفارغة
             <div className="flex flex-col items-center justify-center h-full text-gray-400">
               <ShoppingCart className="w-16 h-16 mb-4 opacity-50" />
               <p className="text-lg font-medium">Your cart is empty</p>
-              <button onClick={toggleCart} className="mt-6 btn btn-primary btn-sm rounded-full px-6">
+              <button onClick={toggleCart} className="mt-6 btn bg-[var(--primary-color)]/90 hover:bg-[var(--primary-color)] border text-white btn-sm rounded-full px-6">
                 Continue Shopping
               </button>
             </div>
           ) : (
-            // قائمة المنتجات
             <ul className="space-y-6">
               {cartItems.map((item) => (
                 <li key={item.id} className="flex gap-4 py-4 border-b border-gray-100 last:border-b-0">
@@ -71,7 +66,6 @@ const CartDrawer = () => {
                     />
                   </div>
 
-                  {/* تفاصيل المنتج */}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-gray-800 line-clamp-2">{item.title}</h3>
@@ -80,7 +74,6 @@ const CartDrawer = () => {
                       </p>
                     </div>
 
-                    {/* التحكم في الكمية والحذف */}
                     <div className="flex items-center justify-between mt-3">
                       <div className="flex items-center border border-gray-200 rounded-full bg-white">
                         <button
@@ -112,7 +105,6 @@ const CartDrawer = () => {
           )}
         </div>
 
-        {/* 3. ذيل القائمة (Footer) - يظهر فقط إذا كانت السلة ممتلئة */}
         {cartItems.length > 0 && (
           <div className="p-6 border-t border-gray-100 bg-gray-50">
             <div className="flex justify-between items-center mb-4">
@@ -129,7 +121,7 @@ const CartDrawer = () => {
               >
                 View Cart
               </Link>
-              <button className="btn btn-primary btn-block">Checkout</button>
+              <button className="btn bg-[var(--primary-color)]/90 hover:bg-[var(--primary-color)] border  text-white btn-block">Checkout</button>
             </div>
             <p className="text-xs text-center text-gray-500 mt-3">
               Shipping & taxes calculated at checkout.

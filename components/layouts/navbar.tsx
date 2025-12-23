@@ -13,7 +13,6 @@ const Navbar = () => {
   const cartCount = totalItems();
 
   return (
-    // 1. تغيير px-32 إلى px-4 في الموبايل و px-32 في الشاشات الكبيرة
     <nav className="navbar fixed top-0 left-0 right-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-gray-100 px-4 md:px-10 lg:px-32 transition-all">
       
       {/* --- الجزء الأيسر: Mobile Menu + Logo --- */}
@@ -72,7 +71,6 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-2 md:gap-4">
-  {/* 1. منطقة البحث - تأخذ المساحة المتاحة وتدفع الأيقونات لليمين */}
   <div className="hidden sm:flex items-center relative flex-1 justify-end max-w-md">
     <div className="relative w-full max-w-[280px]">
       <input
@@ -95,13 +93,12 @@ const Navbar = () => {
     {/* Cart */}
     <div 
       className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group relative"
-      onClick={toggleCart} // إضافة حدث فتح القائمة عند الضغط
+      onClick={toggleCart}
     >
       <ShoppingCart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 group-hover:text-primary transition-colors" />
       
-      {/* عرض الشارة (Badge) فقط إذا كان هناك منتجات في السلة */}
       {cartCount > 0 && (
-        <span className="badge badge-primary badge-xs indicator-item animate-bounce font-bold">
+        <span className="badge badge-primary badge-xs px-1 indicator-item animate-bounce font-bold">
           {cartCount}
         </span>
       )}

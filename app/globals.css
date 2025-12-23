@@ -46,6 +46,9 @@
 }
 
 :root {
+  --primary : #17a26a;
+  --secondary : #171717;
+  --third : #f8f9fa;
   --primary-color: #17a26a;
   --secondary-color: #171717;
   --third-color: #f8f9fa;

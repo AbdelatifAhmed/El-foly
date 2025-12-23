@@ -14,6 +14,7 @@ const BestSellingSec = () => {
         {BestSellingProducts.map((item: CardType) => (
         <Card
           key={item.id}
+          id={item.id}
           title={item.title}
           price={item.price}
           image={item.image}

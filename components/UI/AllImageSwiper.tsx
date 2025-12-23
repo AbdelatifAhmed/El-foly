@@ -27,6 +27,7 @@ export default function AllImageSwiper() {
       {templateImages.map((item) => (
         <SwiperSlide key={item.id} className="py-5">
           <Card
+            id={item.id}
             title={item.title}
             price={item.price}
             image={item.image}
