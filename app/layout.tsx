@@ -1,25 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Roboto } from "next/font/google";
+import { Roboto } from "next/font/google"; // خط واحد فقط
 import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
 import Footer from "@/components/layouts/footer";
 import CartDrawer from "@/components/UI/CartDrawer";
 
-export const inter = Inter({
-  variable: "--font-inter",
+// تعريف الخط هنا بدون تصديره (لحل مشكلة Metadata)
+const roboto = Roboto({
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
-});
-export const poppins = Poppins({
-  weight: ["400", "700"],
-  variable: "--font-poppins",
-  subsets: ["latin"],
-});
-
-export const roboto = Roboto({
-  weight: ['400', '500', '700'], 
-  subsets: ['latin'],            
-  display: 'swap',
-  variable: '--font-roboto',     
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -29,19 +19,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${roboto.variable}`}>
-      <body
-        className={`font-roboto antialiased flex min-h-screen flex-col `}
+    <html lang="en" suppressHydrationWarning>
+      <body 
+        className={`${roboto.className} antialiased flex min-h-screen flex-col`} 
+        suppressHydrationWarning
       >
         <Navbar />
         <CartDrawer />
         {children}
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }

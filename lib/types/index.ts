@@ -47,3 +47,9 @@ export interface CartStore {
   totalItems: () => number;
   totalPrice: () => number;
 }
+
+export interface Category  {
+  id: string;
+  name: string;
+  Icon: LucideIcon;
+};

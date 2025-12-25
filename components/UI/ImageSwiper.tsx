@@ -11,13 +11,27 @@ export default function ImageSwiper() {
     <Swiper
       // install Swiper modules
       modules={[Navigation, A11y]}
-      spaceBetween={20}
-      slidesPerView={4}
+      
       navigation={{
         nextEl: ".today-swiper-next",
         prevEl: ".today-swiper-prev",
       }}
       freeMode
+      breakpoints={{
+        1280:{
+          slidesPerView: 4,
+          spaceBetween: 20,
+        },
+        780:{
+          slidesPerView: 2,
+          spaceBetween: 15,
+        },
+        640:{
+          slidesPerView: 1,
+          spaceBetween: 10,
+        },
+
+      }}
     >
       {templateImages.map((item) => (
         <SwiperSlide key={item.id} className="py-5">

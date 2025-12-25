@@ -1,4 +1,4 @@
-import { inter, poppins } from "@/app/layout";
+"use client";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,147 +6,66 @@ import React from "react";
 
 const Carousel = () => {
   return (
-    <div className="carousel rounded-box w-full h-[400px] ">
-      <div className="carousel-item w-full bg-black flex justify-between">
-        <div className="w-1/2 flex flex-col justify-center items-start px-20 text-white space-y-6">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/images/apple-logo.svg"
-              alt="Apple Logo"
-              className="text-white"
-              width={100}
-              height={100}
-            />
-            <span
-              className={`text-white ${poppins.variable} text-bold text-lg`}
-            >
-              IPhone 14 series
-            </span>
-          </div>
-          <div className={`pl-4 ${inter.variable}`}>
-            <h1 className="text-5xl font-bold leading-snug">
-              Up to 10% <br />
-              off voucher
-            </h1>
-          </div>
-          <div className="pl-4">
-            <div className=" underline underline-offset-8 text-white  border-0 group">
+    // تم إضافة snap-x للتنقل السلس على الموبايل
+    <div className="carousel rounded-box w-full h-[300px] md:h-[400px] lg:h-[450px] shadow-xl">
+      
+      {/* Slide Item Helper Function or Repeated Pattern */}
+      {[
+        { id: 1, title: "IPhone 14 series", img: "/images/iphone-hero.png", logo: "/images/apple-logo.svg", text: "Up to 10% off voucher", reverse: false },
+        { id: 2, title: "IPhone 14 series", img: "/images/iphone-hero2.png", logo: "/images/apple-logo.svg", text: "All colors you want in one place", reverse: true },
+        { id: 3, title: "Galaxy S series", img: "/images/samsung-hero.png", logo: "/images/samsung-logo.svg", text: "Up to 10% off voucher", reverse: false },
+      ].map((slide) => (
+        <div 
+          key={slide.id} 
+          className={`carousel-item w-full bg-black flex flex-col md:flex-row ${slide.reverse ? 'md:flex-row-reverse' : ''} justify-between overflow-hidden`}
+        >
+          {/* نص العرض */}
+          <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start px-6 md:px-12 lg:px-20 text-white space-y-4 md:space-y-6 py-8 md:py-0">
+            <div className="flex items-center gap-3">
+              <Image
+                src={slide.logo}
+                alt="Brand Logo"
+                width={40} // تصغير اللوجو للموبايل
+                height={40}
+                className="w-8 h-8 md:w-12 md:h-12 object-contain"
+              />
+              <span className={`text-white font-medium text-sm md:text-lg`}>
+                {slide.title}
+              </span>
+            </div>
+            
+            <div className={`text-center md:text-left`}>
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight md:leading-snug">
+                {slide.text.split('  ').map((t, i) => <React.Fragment key={i}>{t} <br className="hidden md:block" /></React.Fragment>)}
+              </h1>
+            </div>
+
+            <div className="flex justify-center md:justify-start">
               <Link
                 href="#"
-                className="flex items-center px-4 py-2 font-medium text-lg group-hover:translate-x-2 transition-all duration-150"
+                className="flex items-center group border-b border-white pb-1 hover:text-white transition-all duration-150"
               >
-                <span className="mr-3">Shop Now</span>
-                <span>
-                  <ArrowRight />
-                </span>
+                <span className="mr-2 font-medium text-sm md:text-lg">Shop Now</span>
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-2 transition-transform" />
               </Link>
             </div>
           </div>
-        </div>
-        <div className=" w-1/2 flex items-center justify-center">
-          <Image
-            src="/images/iphone-hero.png"
-            className=""
-            alt="iphone Hero"
-            width={600}
-            height={300}
-          />
-        </div>
-      </div>
 
-      <div className="carousel-item w-full bg-black flex-row-reverse justify-between">
-        <div className="w-1/2 flex flex-col justify-center items-start px-20 text-white space-y-6">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/images/apple-logo.svg"
-              alt="Apple Logo"
-              className="text-white"
-              width={100}
-              height={100}
-            />
-            <span
-              className={`text-white ${poppins.variable} text-bold text-lg`}
-            >
-              IPhone 14 series
-            </span>
-          </div>
-          <div className={`pl-4 ${inter.variable}`}>
-            <h1 className="text-5xl font-bold leading-snug">
-              All colors you want  <br />
-              in one place
-            </h1>
-          </div>
-          <div className="pl-4">
-            <div className=" underline underline-offset-8 text-white  border-0 group">
-              <Link
-                href="#"
-                className="flex items-center px-4 py-2 font-medium text-lg group-hover:translate-x-2 transition-all duration-150"
-              >
-                <span className="mr-3">Shop Now</span>
-                <span>
-                  <ArrowRight />
-                </span>
-              </Link>
+          {/* صورة المنتج */}
+          <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
+            <div className="relative w-full h-full max-h-[200px] md:max-h-full flex justify-center">
+              <Image
+                src={slide.img}
+                alt="Hero Product"
+                width={600}
+                height={400}
+                className="object-contain w-auto h-full"
+                priority
+              />
             </div>
           </div>
         </div>
-        <div className=" w-1/2 flex items-center justify-center">
-          <Image
-            src="/images/iphone-hero2.png"
-            className=""
-            alt="iphone Hero"
-            width={800}
-            height={400}
-          />
-        </div>
-      </div>
-
-
-      <div className="carousel-item w-full bg-black flex justify-between">
-        <div className="w-1/2 flex flex-col justify-center items-start px-20 text-white space-y-3">
-          <div className="flex items-center space-x-3">
-            <Image
-              src="/images/samsung-logo.svg"
-              alt="Samsung Logo"
-              width={200}
-              height={200}
-            />
-            <span
-              className={`text-white ${poppins.variable} text-bold text-lg`}
-            >
-                Galaxy S series
-            </span>
-          </div>
-          <div className={`pl-4 ${inter.variable}`}>
-            <h1 className="text-5xl font-bold leading-snug">
-              Up to 10% <br />
-              off voucher
-            </h1>
-          </div>
-          <div className="pl-4">
-            <div className=" underline underline-offset-8 text-white  border-0 group">
-              <Link
-                href="#"
-                className="flex items-center px-4 py-2 font-medium text-lg group-hover:translate-x-2 transition-all duration-150"
-              >
-                <span className="mr-3">Shop Now</span>
-                <span>
-                  <ArrowRight />
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className=" w-1/2 flex items-center justify-center">
-          <Image
-            src="/images/samsung-hero.png"
-            className=""
-            alt="Samsung Hero"
-            width={900}
-            height={1200}
-          />
-        </div>
-      </div>
+      ))}
     </div>
   );
 };

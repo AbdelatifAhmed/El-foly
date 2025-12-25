@@ -22,7 +22,7 @@ const Services = () => {
         },
     ];
   return (
-    <div className="grid grid-cols-3 gap-8  py-16">
+    <div className="grid lg:grid-cols-3 grid-col-1 gap-8  py-16">
         {Services.map((service) => (
             <div key={service.id} className="flex flex-col items-center gap-4">
                 <div className="p-4 bg-black  border-gary-200 border-12 rounded-full text-white"> 

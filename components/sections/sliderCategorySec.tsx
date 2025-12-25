@@ -1,39 +1,29 @@
 // components/CategorySlider.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  Smartphone,
-  Laptop,
-  Watch,
-  Headphones,
-  Package,
-  Camera,
-  Tablet,
   ChevronLeft,
   ChevronRight,
-  LucideIcon,
 } from "lucide-react";
+import { categories } from "@/constant/constants";
+import  { getWindowDimensions } from "@/hooks/useWindowDimensions ";
 
-type Category = {
-  id: string;
-  name: string;
-  Icon: LucideIcon;
-};
 
-export default function CategorySlider() {
-  // Categories live inside the component
-  const categories: Category[] = [
-    { id: "phones", name: "Phones", Icon: Smartphone },
-    { id: "computers", name: "Computers", Icon: Laptop },
-    { id: "watches", name: "Smart Watches", Icon: Watch },
-    { id: "headphones", name: "Headphones", Icon: Headphones },
-    { id: "accessories", name: "Accessories", Icon: Package },
-    { id: "cameras", name: "Cameras", Icon: Camera },
-    { id: "tablets", name: "Tablets", Icon: Tablet },
-  ];
+export default function CategorySlider() { 
 
-  const visibleCount = 5; // always show 5 items
+    const { width } = getWindowDimensions();
+
+  const [visibleCount, setVisibleCount] = useState<number>(5); // always show 5 items
+  useEffect(() => {
+    if (width < 780) {
+      setVisibleCount(1);
+    } else if (width < 1280) {
+      setVisibleCount(3);
+    } else {
+      setVisibleCount(5);
+    }
+  }, [width]);
   const total = categories.length;
   const visible = Math.min(visibleCount, total);
   const centerSlot = Math.floor(visible / 2);
@@ -53,7 +43,7 @@ export default function CategorySlider() {
     <div className="w-full ">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h2 className="head-line">Browse By Category</h2>
+        <h2 className="head-line ">Browse By Category</h2>
         <div className="flex gap-2">
           <button
             aria-label="Previous"

@@ -2,23 +2,22 @@
 import React, { useEffect, useState } from "react";
 
 const FlashCounter = () => {
-  // State for countdown values
+  const [isClient, setIsClient] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
-    days: 3,
+    days: 4,
     hours: 0,
     minutes: 0,
     seconds: 0,
   });
 
   useEffect(() => {
-    // Check if we already have a target date in localStorage
+    setIsClient(true);
     const target = localStorage.getItem("flash-sale-end");
 
     let targetDate: number;
     if (target) {
       targetDate = parseInt(target, 10);
     } else {
-      // Default: 3 days from now (for testing)
       targetDate = new Date().getTime() + 3 * 24 * 60 * 60 * 1000;
       localStorage.setItem("flash-sale-end", targetDate.toString());
     }
@@ -33,9 +32,7 @@ const FlashCounter = () => {
       } else {
         setTimeLeft({
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          ),
+          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((distance % (1000 * 60)) / 1000),
         });
@@ -45,48 +42,32 @@ const FlashCounter = () => {
     return () => clearInterval(interval);
   }, []);
 
+  if (!isClient) return <div className="h-16"></div>;
+
+  const TimeUnit = ({ label, value }: { label: string; value: number }) => (
+    <div className="flex flex-col items-start">
+      <span className="text-[10px] md:text-xs font-bold text-black mb-1">{label}</span>
+      <span className="countdown font-inter font-bold text-2xl md:text-3xl lg:text-4xl">
+        <span style={{ "--value": value } as React.CSSProperties}></span>
+      </span>
+    </div>
+  );
+
   return (
-    <div className="grid grid-flow-col gap-5 text-center justify-center items-center">
-      <div className="flex flex-col p-2 bg-white rounded-box ">
-        Days
-        <span className="countdown font-mono text-5xl">
-          <span
-            style={{ "--value": timeLeft.days } as React.CSSProperties}
-          ></span>
-        </span>
-      </div>
-
-        <div className="text-3xl text-red-700">:</div>
-      <div className="flex flex-col p-2 bg-white rounded-box ">
-        Hours
-        <span className="countdown font-mono text-5xl">
-          <span
-            style={{ "--value": timeLeft.hours } as React.CSSProperties}
-          ></span>
-        </span>
-        
-      </div>
-        <div className="text-3xl text-red-700">:</div>
-      <div className="flex flex-col p-2 bg-white rounded-box ">
-        Minute
-        <span className="countdown font-mono text-5xl">
-          <span
-            style={{ "--value": timeLeft.minutes } as React.CSSProperties}
-          ></span>
-        </span>
-        
-      </div>
-        <div className="text-3xl text-red-700">:</div>
-
-      <div className="flex flex-col p-2 bg-white rounded-box font-weight-bold">
-        Seconds
-        <span className="countdown font-mono text-5xl">
-          <span
-            style={{ "--value": timeLeft.seconds } as React.CSSProperties}
-          ></span>
-        </span>
-        
-      </div>
+    <div className="flex items-center gap-3 md:gap-5 lg:gap-8">
+      <TimeUnit label="Days" value={timeLeft.days} />
+      
+      <div className="text-xl md:text-2xl text-[#E07575] self-end mb-1 md:mb-2">:</div>
+      
+      <TimeUnit label="Hours" value={timeLeft.hours} />
+      
+      <div className="text-xl md:text-2xl text-[#E07575] self-end mb-1 md:mb-2">:</div>
+      
+      <TimeUnit label="Minutes" value={timeLeft.minutes} />
+      
+      <div className="text-xl md:text-2xl text-[#E07575] self-end mb-1 md:mb-2">:</div>
+      
+      <TimeUnit label="Seconds" value={timeLeft.seconds} />
     </div>
   );
 };

@@ -7,8 +7,8 @@ const TodayImageSwiper = () => {
     <div>
       <div className="my-5">
         <p className="title-line">Today&apos;s</p>
-        <div className="flex justify-between items-center ">
-          <div className="flex gap-20">
+        <div className="flex justify-between items-start lg:items-center ">
+          <div className="flex flex-col lg:flex-row gap-5 lg:gap-20">
             <p className="head-line">Falsh sales</p>
             <FlashCounter />
           </div>

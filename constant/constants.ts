@@ -1,5 +1,15 @@
-import { LogOut, ShoppingBasket, UserRoundPen } from "lucide-react";
-import { CardType, UserIcon } from "../lib/types/index";
+import { LogOut, ShoppingBasket, Smartphone, UserRoundPen,Laptop,Watch, Headphones, Package, Camera, Tablet } from "lucide-react";
+import { CardType, UserIcon, Category } from "../lib/types/index";
+
+export const categories: Category[] = [
+    { id: "phones", name: "Phones", Icon: Smartphone },
+    { id: "computers", name: "Computers", Icon: Laptop },
+    { id: "watches", name: "Smart Watches", Icon: Watch },
+    { id: "headphones", name: "Headphones", Icon: Headphones },
+    { id: "accessories", name: "Accessories", Icon: Package },
+    { id: "cameras", name: "Cameras", Icon: Camera },
+    { id: "tablets", name: "Tablets", Icon: Tablet },
+  ];
 export  const templateImages : CardType[] = [
     {
       id: 1,
