@@ -18,6 +18,7 @@ export type CardType = {
   vocher?: number;
   rating?: number;
   ratingCount?: number;
+  isWishlistPage?: boolean;
 };
 
 export interface UserIcon {
@@ -53,3 +54,12 @@ export interface Category  {
   name: string;
   Icon: LucideIcon;
 };
+
+
+
+export interface WishlistState {
+  wishlist: CardType[];
+  addToWishlist: (product: CardType) => void;
+  removeFromWishlist: (id: string | number) => void;
+  toggleWishlist: (product: CardType) => void;
+}

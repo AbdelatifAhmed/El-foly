@@ -45,11 +45,9 @@ export default function CartPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
-          {/* 1. قائمة المنتجات (8 أعمدة) */}
           <div className="lg:col-span-8 space-y-4">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               <table className="table w-full">
-                {/* الرأس للمتصفحات الكبيرة */}
                 <thead className="hidden md:table-header-group bg-gray-50/50">
                   <tr className="text-gray-400 uppercase text-[10px] tracking-widest border-none">
                     <th className="py-4">Product</th>
@@ -63,7 +61,7 @@ export default function CartPage() {
                     <tr key={item.id} className="border-none">
                       <td className="py-6">
                         <div className="flex items-center gap-4">
-                          <div className="relative w-20 h-20 bg-gray-50 rounded-xl border border-gray-100 flex-shrink-0">
+                          <div className="relative w-20 h-20 bg-gray-50 rounded-xl border border-gray-100 shrink-0">
                             <Image src={item.image} alt={item.title} fill className="object-contain p-2" />
                           </div>
                           <div>
@@ -135,7 +133,7 @@ export default function CartPage() {
               </div>
 
               <div className="space-y-3">
-                <button className="btn bg-[var(--primary-color)]/90 hover:bg-[var(--primary-color)] border text-white btn-block rounded-xl h-14 text-lg">
+                <button className="btn bg-(--primary-color)/90 hover:bg-(--primary-color) border text-white btn-block rounded-xl h-14 text-lg">
                   <CreditCard className="w-5 h-5" />
                   Proceed to Checkout
                 </button>
