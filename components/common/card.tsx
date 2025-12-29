@@ -61,7 +61,7 @@ const Card = (props: CardType) => {
 
                 <button 
                     onClick={handleAddToCart}
-                    className="absolute bottom-0 left-0 w-full bg-gray-900 text-white py-3 text-sm font-bold flex items-center justify-center gap-2 transform translate-y-full group-hover:translate-y-0 transition-transform focus:translate-y-0  duration-300 hover:bg-primary"
+                    className="absolute bottom-0 left-0 w-full bg-gray-900 text-white py-3 text-sm font-bold flex items-center justify-center gap-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 hover:bg-primary"
                 >
                     <ShoppingCart size={16} />
                     Add to Cart
