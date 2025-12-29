@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CardType } from "@/lib/types";
 import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
+import Link from "next/link";
 
 
 
@@ -51,14 +52,16 @@ const Card = (props: CardType) => {
                     </button>
                     {!isWishlistPage && (
                         <button className="p-2 bg-white text-gray-600 rounded-full shadow-md hover:bg-gray-50 transition-colors">
-                            <Eye size={18} />
+                            <Link href={`/products/${id}`}>
+                                <Eye size={18} />
+                            </Link>
                         </button>
                     )}
                 </div>
 
                 <button 
                     onClick={handleAddToCart}
-                    className="absolute bottom-0 left-0 w-full bg-gray-900 text-white py-3 text-sm font-bold flex items-center justify-center gap-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 hover:bg-primary"
+                    className="absolute bottom-0 left-0 w-full bg-gray-900 text-white py-3 text-sm font-bold flex items-center justify-center gap-2 transform translate-y-full group-hover:translate-y-0 transition-transform focus:translate-y-0  duration-300 hover:bg-primary"
                 >
                     <ShoppingCart size={16} />
                     Add to Cart
