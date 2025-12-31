@@ -120,7 +120,7 @@ const Navbar = () => {
             <ShoppingCart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 group-hover:text-primary transition-colors" />
             
             {totalItems() > 0 && (
-              <span className="badge badge-primary badge-xs px-1 indicator-item animate-bounce font-bold">
+              <span className="badge badge-secondary badge-xs px-1 indicator-item animate-bounce font-bold">
                 {totalItems()}
               </span>
             )}

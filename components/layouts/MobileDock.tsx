@@ -7,10 +7,9 @@ import { useWishlistStore } from '@/store/wishlist.store';
 
 const MobileDock = () => {
   const pathname = usePathname();
-  const { cartItems } = useCartStore(); // جلب العربة للتحقق من وجود منتجات
+  const { cartItems } = useCartStore(); 
   const wishlist = useWishlistStore((state) => state.wishlist);
 
-  // تحقق مما إذا كانت العربة أو المفضلة تحتوي على عناصر
   const hasCartItems = cartItems.length > 0;
   const hasWishlistItems = wishlist.length > 0;
 
@@ -35,13 +34,11 @@ const MobileDock = () => {
         <span className="dock-label">Home</span>
       </Link>
 
-      {/* Wishlist - مع حالة (Status Dot) */}
       <Link href="/wishlist" className={pathname === '/wishlist' ? 'dock-active text-primary' : ''}>
           <Heart size={22} />
         <span className="dock-label">Wishlist</span>
       </Link>
 
-      {/* Cart - تحول إلى Link مع حالة (Status Dot) */}
       <Link href="/cart" className={pathname === '/cart' ? 'dock-active text-primary' : ''}>
         <ShoppingCart size={22} />
         <span className="dock-label">Cart</span>
