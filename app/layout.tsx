@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
 import Footer from "@/components/layouts/footer";
 import CartDrawer from "@/components/UI/CartDrawer";
+import MobileDock from "@/components/layouts/MobileDock";
 
 // تعريف الخط هنا بدون تصديره (لحل مشكلة Metadata)
 const roboto = Roboto({
@@ -29,6 +30,7 @@ export default function RootLayout({
         <Navbar />
         <CartDrawer />
         {children}
+        <MobileDock />
         <Footer />
       </body>
     </html>

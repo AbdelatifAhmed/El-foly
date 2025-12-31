@@ -44,7 +44,7 @@ const ProductPage = () => {
                 <p>
                     The product you are looking for does not exist or has been removed.
                 </p>
-                <button className="btn bg-[var(--primary-color)]/90 hover:bg-transparent border border-[var(--primary-color)] hover:text-[var(--primary-color)] text-white px-8">
+                <button className="btn bg-(--primary-color)/90 hover:bg-transparent border border-(--primary-color) hover:text-(--primary-color) text-white px-8">
                     <Link href="/products">Back to Products</Link>
                 </button>
             </div>

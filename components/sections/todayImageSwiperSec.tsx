@@ -1,7 +1,9 @@
+'use client';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import FlashCounter from "../UI/flashCounter";
 import ImageSwiper from "../UI/ImageSwiper";
 import Button from "../common/Button";
+import Link from "next/link";
 const TodayImageSwiper = () => {
   return (
     <div>
@@ -30,7 +32,9 @@ const TodayImageSwiper = () => {
       </div>
       <ImageSwiper />
       <div className="flex justify-center items-center">
-       <Button Title='View All Products'/>
+        <Link href="/products">
+          <Button Title='View All Products' />
+        </Link>
       </div>
     </div>
   );

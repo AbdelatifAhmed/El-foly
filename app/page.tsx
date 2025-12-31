@@ -6,7 +6,7 @@ import OurProductSec from "@/components/sections/OurProductSec";
 import Services from "@/components/common/services";
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col flex-grow">
+    <main className="flex min-h-screen flex-col grow">
       {/* Hero */}
       <section className="mt-10 md:mt-20 lg:mt-30 px-4 md:px-10 lg:px-40">
         <Carousel />
