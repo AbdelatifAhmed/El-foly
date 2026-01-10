@@ -1,17 +1,25 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import Button from "@/components/common/Button";
 
 const verifySchema = z.object({
   code: z.string().length(6, "الكود يجب أن يتكون من 6 أرقام"),
 });
 
-const VerifyPage = () => {
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<span className="loading loading-ring loading-lg"></span>}>
+      <VerifyPageContent />
+    </Suspense>
+  );
+}
+
+
+const VerifyPageContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
@@ -107,4 +115,5 @@ const VerifyPage = () => {
   );
 };
 
-export default VerifyPage;
+
+
