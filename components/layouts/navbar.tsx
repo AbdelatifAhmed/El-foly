@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 import { Search, Heart, ShoppingCart, Menu } from "lucide-react"; 
 import { useCartStore } from "@/store/cart.store"; 
 import { useWishlistStore } from "@/store/wishlist.store"; 
+import { useAuthStore } from "@/store/auth.store";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { toggleCart, totalItems } = useCartStore();
+  const user = useAuthStore((state) => state.user);
   
   const wishlist = useWishlistStore((state) => state.wishlist);
 
@@ -41,7 +43,7 @@ const Navbar = () => {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/about">About</Link></li>
             <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/signup">Sign Up</Link></li>
+            {!user && <li><Link href="/signup">Sign Up</Link></li>}
           </ul>
         </div>
 
@@ -76,9 +78,10 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            {!user &&
             <Link href="/signup" className={`hover:text-primary transition-colors ${pathname === "/signup" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
               Sign Up
-            </Link>
+            </Link>}
           </li>
         </ul>
       </div>
@@ -98,19 +101,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-1 md:gap-3 bg-gray-100/50 p-1 rounded-full px-2 md:px-4">
           
-          {/* Wishlist Link & Indicator */}
-          <Link 
-            href="/wishlist" 
-            className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group"
-          >
-            <Heart className={`w-5 h-5 md:w-6 md:h-6 transition-colors ${wishlist.length > 0 ? 'fill-primary text-primary' : 'text-gray-700 group-hover:text-primary'}`} />
-            
-            {wishlist.length > 0 && (
-              <span className="badge badge-primary badge-xs px-1 indicator-item font-bold">
-                {wishlist.length}
-              </span>
-            )}
-          </Link>
+         
 
           {/* Cart */}
           <div 
@@ -125,11 +116,27 @@ const Navbar = () => {
               </span>
             )}
           </div>
+          {/*  */}
+          {user && <div className="w-px h-6 bg-gray-300 mx-1 hidden md:block"></div>}
 
-          <div className="w-px h-6 bg-gray-300 mx-1 hidden md:block"></div>
+
+           {/* Wishlist Link & Indicator */}
+          {user && <Link 
+            href="/wishlist" 
+            className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group"
+          >
+            <Heart className={`w-5 h-5 md:w-6 md:h-6 transition-colors ${wishlist.length > 0 ? 'fill-primary text-primary' : 'text-gray-700 group-hover:text-primary'}`} />
+            
+            {wishlist.length > 0 && (
+              <span className="badge badge-primary badge-xs px-1 indicator-item font-bold">
+                {wishlist.length}
+              </span>
+            )}
+          </Link>}
+
 
           {/* Profile */}
-          <div className="relative">
+          {user &&<div className="relative">
             <div 
               className="avatar cursor-pointer hover:ring-2 ring-primary ring-offset-2 rounded-full transition-all"
               onClick={() => setIsOpen(!isOpen)}
@@ -148,7 +155,7 @@ const Navbar = () => {
                 {userIconList.map((item) => (
                   <li key={item.id} className="list-none">
                     <Link 
-                      href={item.title === "My Account" ? "/account" : "#"} // يمكنك ضبط الروابط حسب الحاجة
+                      href={item.path ? item.path : "#"} 
                       className={`flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg cursor-pointer group transition-colors
                       ${item.title === "Logout" ? "text-red-500 hover:bg-red-50" : "text-gray-700"}`}
                     >
@@ -159,7 +166,7 @@ const Navbar = () => {
                 ))}
               </ul>
             )}
-          </div>
+          </div>}
         </div>
       </div>
     </nav>

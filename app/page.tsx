@@ -8,18 +8,18 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col grow">
       {/* Hero */}
-      <section className="mt-10 md:mt-20 lg:mt-30 px-4 md:px-10 lg:px-40">
+      <section className="mt-10 md:mt-20 lg:mt-25 px-4 md:px-10 lg:px-50">
         <Carousel />
       </section>
       {/* Categories */}
-      <section className="mt-10 md:mt-20 lg:mt-30 px-4 md:px-10 lg:px-40">
+      <section className="mt-10 md:mt-20 lg:mt-10 px-4 md:px-10 lg:px-50">
         <div className="mt-5">
           <p className="title-line">Categories</p>
           <SliderCategory />
         </div>
       </section>
       {/* Today's Flash Sales */}
-      <section className="mt-10 md:mt-20 lg:mt-30 px-4 md:px-10 lg:px-40">
+      <section className="mt-10 md:mt-20 lg:mt-10 px-4 md:px-10 lg:px-50">
         <TodayImageSwiper />
       </section>
 
@@ -27,15 +27,15 @@ export default function Home() {
        
       </section>
       {/* Best Selling Products */}
-      <section className="mt-10 md:mt-20 lg:mt-30 px-4 md:px-10 lg:px-40">
+      <section className="mt-10 md:mt-20 lg:mt-10 px-4 md:px-10 lg:px-50">
         <BestSellingSec />
       </section>
       {/* Our Products */}
-      <section className="mt-10 md:mt-20 lg:mt-30 px-4 md:px-10 lg:px-40">
+      <section className="mt-10 md:mt-20 lg:mt-10 px-4 md:px-10 lg:px-50">
         <OurProductSec />
       </section>
 
-      <section className="mt-10 md:mt-20 lg:mt-30 px-4 md:px-10 lg:px-40">
+      <section className="mt-10 md:mt-20 lg:mt-10 px-4 md:px-10 lg:px-50">
         <Services />
       </section>
     </main>

@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
  images: {
     remotePatterns: [
       {
@@ -10,7 +9,6 @@ const nextConfig: NextConfig = {
         port: '', // Leave empty unless a specific port is required
         pathname: '/images/**', // Adjust the path as needed, use '**' for any subdirectories
       },
-      // Add more objects for other external image sources if necessary
     ],
   },
 };

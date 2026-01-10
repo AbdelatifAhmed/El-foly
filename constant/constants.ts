@@ -190,12 +190,14 @@ export  const templateImages : CardType[] = [
       {
          id: 1,
          icon: UserRoundPen,
-         title: 'Profile'
+         title: 'Profile',
+         path: '/profile'
       },
       {
          id: 2,
          icon: ShoppingBasket,
-         title: 'My Orders'
+         title: 'My Orders',
+         path: '/my-orders'
       },
       {
          id: 3,

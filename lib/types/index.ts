@@ -25,6 +25,7 @@ export interface UserIcon {
   id: number;
   icon: LucideIcon;
   title: string;
+  path?: string;
 }
 
 export interface CartItem {
