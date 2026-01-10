@@ -1,14 +1,22 @@
 'use client';
-import Button from '@/components/common/Button'
 import Link from 'next/link'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginInput } from "@/validation/auth";
 import { useAuthStore } from "@/store/auth.store";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import api from '@/lib/axios';
-const LoginPage = () => {
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<span className="loading loading-ring loading-lg"></span>}>
+      <LoginContent />
+    </Suspense>
+  );
+}
+
+const LoginContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -25,8 +33,6 @@ const LoginPage = () => {
         email: data.contact,
         password: data.password
       });
-      
-
       const user = response.data?.data?.customer;
       const token = response.data?.data?.token;
 
@@ -84,4 +90,3 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
