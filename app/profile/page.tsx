@@ -50,8 +50,8 @@ const ProfileDashboard = () => {
           <div className="md:col-span-1 bg-white rounded-2xl p-6 shadow-sm h-fit">
             <div className="flex flex-col items-center mb-8">
               <div className="relative w-24 h-24 mb-4">
-                <img src={user?.avatar || "/default-avatar.png"} className="rounded-full object-cover w-full h-full border-4 border-gray-100" />
-                <button className="absolute bottom-0 right-0 p-1 bg-primary text-white rounded-full shadow-lg">
+                <img src={user?.avatar || "/images/account-avatar-profile-user.svg"} className="rounded-full object-cover w-full h-full border-4 border-gray-100" />
+                <button className="absolute bottom-0 right-0 p-1 bg-primary text-white rounded-full shadow-lg curosr-pointer">
                   <Camera size={16} />
                 </button>
               </div>
