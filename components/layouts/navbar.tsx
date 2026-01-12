@@ -2,23 +2,35 @@
 import { userIconList } from "@/constant/constants";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Search, Heart, ShoppingCart, Menu } from "lucide-react"; 
-import { useCartStore } from "@/store/cart.store"; 
-import { useWishlistStore } from "@/store/wishlist.store"; 
+import { Search, Heart, ShoppingCart, Menu } from "lucide-react";
+import { useCartStore } from "@/store/cart.store";
+import { useWishlistStore } from "@/store/wishlist.store";
 import { useAuthStore } from "@/store/auth.store";
+import { UserIcon } from "@/lib/types";
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { toggleCart, totalItems } = useCartStore();
   const user = useAuthStore((state) => state.user);
-  
+  const router = useRouter();
+  const logout = useAuthStore((state) => state.logout);
+
+  const handleAction = (item: UserIcon) => {
+    if (item.title === "Logout") {
+      logout();
+      router.push("/login");
+      router.refresh();
+    }
+    setIsOpen(false);
+  };
+
   const wishlist = useWishlistStore((state) => state.wishlist);
 
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -29,7 +41,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar fixed top-0 left-0 right-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-gray-100 px-4 md:px-10 lg:px-32 transition-all">
-      
+
       {/* --- الجزء الأيسر: Mobile Menu + Logo --- */}
       <div className="navbar-start gap-2">
         <div className="dropdown lg:hidden">
@@ -52,7 +64,7 @@ const Navbar = () => {
           <Image
             src="/images/elfoly-logo.svg"
             alt="Logo"
-            width={60} 
+            width={60}
             height={60}
             className="w-12 h-12 md:w-16 md:h-16"
           />
@@ -79,9 +91,9 @@ const Navbar = () => {
           </li>
           <li>
             {!user &&
-            <Link href="/signup" className={`hover:text-primary transition-colors ${pathname === "/signup" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
-              Sign Up
-            </Link>}
+              <Link href="/signup" className={`hover:text-primary transition-colors ${pathname === "/signup" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+                Sign Up
+              </Link>}
           </li>
         </ul>
       </div>
@@ -100,16 +112,16 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-1 md:gap-3 bg-gray-100/50 p-1 rounded-full px-2 md:px-4">
-          
-         
+
+
 
           {/* Cart */}
-          <div 
+          <div
             className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group relative"
             onClick={toggleCart}
           >
             <ShoppingCart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 group-hover:text-primary transition-colors" />
-            
+
             {totalItems() > 0 && (
               <span className="badge badge-secondary badge-xs px-1 indicator-item animate-bounce font-bold">
                 {totalItems()}
@@ -120,13 +132,13 @@ const Navbar = () => {
           {user && <div className="w-px h-6 bg-gray-300 mx-1 hidden md:block"></div>}
 
 
-           {/* Wishlist Link & Indicator */}
-          {user && <Link 
-            href="/wishlist" 
+          {/* Wishlist Link & Indicator */}
+          {user && <Link
+            href="/wishlist"
             className="indicator cursor-pointer p-2 hover:bg-white rounded-full transition-colors group"
           >
             <Heart className={`w-5 h-5 md:w-6 md:h-6 transition-colors ${wishlist.length > 0 ? 'fill-primary text-primary' : 'text-gray-700 group-hover:text-primary'}`} />
-            
+
             {wishlist.length > 0 && (
               <span className="badge badge-primary badge-xs px-1 indicator-item font-bold">
                 {wishlist.length}
@@ -136,17 +148,17 @@ const Navbar = () => {
 
 
           {/* Profile */}
-          {user &&<div className="relative">
-            <div 
+          {user && <div className="relative">
+            <div
               className="avatar cursor-pointer hover:ring-2 ring-primary ring-offset-2 rounded-full transition-all"
               onClick={() => setIsOpen(!isOpen)}
             >
               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full">
-                <Image 
-                    src="/icons/user-circle-fill.svg" 
-                    alt="User" 
-                    width={40} 
-                    height={40} 
+                <Image
+                  src="/icons/user-circle-fill.svg"
+                  alt="User"
+                  width={40}
+                  height={40}
                 />
               </div>
             </div>
@@ -154,14 +166,25 @@ const Navbar = () => {
               <ul className="absolute top-full right-0 mt-4 p-2 shadow-2xl bg-white border border-gray-100 rounded-xl w-56 z-60 animate-in fade-in zoom-in duration-200">
                 {userIconList.map((item) => (
                   <li key={item.id} className="list-none">
-                    <Link 
-                      href={item.path ? item.path : "#"} 
-                      className={`flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg cursor-pointer group transition-colors
-                      ${item.title === "Logout" ? "text-red-500 hover:bg-red-50" : "text-gray-700"}`}
-                    >
-                      <item.icon className="w-5 h-5 group-hover:scale-110 transition-transform"/>
-                      <span className="text-sm font-medium">{item.title}</span>
-                    </Link>
+                    {item.title === "Logout" ? (
+                      // لو العنصر هو Logout، استخدم زرار بدل Link
+                      <button
+                        onClick={() => handleAction(item)}
+                        className="w-full flex items-center gap-4 p-3 hover:bg-red-50 rounded-lg cursor-pointer group transition-colors text-red-500"
+                      >
+                        <item.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        <span className="text-sm font-medium">{item.title}</span>
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.path || "#"}
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg cursor-pointer group transition-colors text-gray-700"
+                      >
+                        <item.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        <span className="text-sm font-medium">{item.title}</span>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

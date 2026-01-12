@@ -12,8 +12,8 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       const token = Cookies.get('auth_token');
       if (token) {
         try {
-          const res = await api.get('https://api-friend.com/v1/me');
-          setUser(res.data.user);
+          const res = await api.get('/auth/profile');
+          setUser(res.data);
         } catch (err) {
           Cookies.remove('auth_token');
         }

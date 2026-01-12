@@ -5,6 +5,7 @@ import Navbar from "@/components/layouts/navbar";
 import Footer from "@/components/layouts/footer";
 import CartDrawer from "@/components/UI/CartDrawer";
 import MobileDock from "@/components/layouts/MobileDock";
+import AuthProvider from "@/lib/auth/authProvider";
 
 // تعريف الخط هنا بدون تصديره (لحل مشكلة Metadata)
 const roboto = Roboto({
@@ -23,15 +24,18 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body 
-        className={`${roboto.className} antialiased flex min-h-screen flex-col`} 
+      <body
+        className={`${roboto.className} antialiased flex min-h-screen flex-col`}
         suppressHydrationWarning
       >
-        <Navbar />
-        <CartDrawer />
-        {children}
-        <MobileDock />
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <CartDrawer />
+          {children}
+          <MobileDock />
+          <Footer />
+        </AuthProvider>
+
       </body>
     </html>
   );
