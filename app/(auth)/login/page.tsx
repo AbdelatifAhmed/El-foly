@@ -37,8 +37,9 @@ const LoginContent = () => {
       const token = response.data?.data?.token;
 
       if (token) {
+
         setAuth(user, token);
-        router.push(callbackUrl); // توجيه للمكان اللي كان عاوزه أو للهوم
+        router.push(callbackUrl);
         router.refresh(); // مهمة جداً عشان الميدل وير يحس بالتوكن الجديد
       }
     } catch (error: any) {

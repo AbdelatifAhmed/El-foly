@@ -13,7 +13,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       if (token) {
         try {
           const res = await api.get('/auth/profile');
-          setUser(res.data);
+          setUser(res.data?.data);
         } catch (err) {
           Cookies.remove('auth_token');
         }

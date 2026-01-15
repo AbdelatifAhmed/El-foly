@@ -9,6 +9,7 @@ import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
 import { useAuthStore } from "@/store/auth.store";
 import { UserIcon } from "@/lib/types";
+import api from "@/lib/axios";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -18,8 +19,26 @@ const Navbar = () => {
   const router = useRouter();
   const logout = useAuthStore((state) => state.logout);
 
-  const handleAction = (item: UserIcon) => {
+  const handleAction = async (item: UserIcon) => {
     if (item.title === "Logout") {
+      try {
+        const respond = await api.post("/api/auth/logout");
+        if (respond.status === 204) {
+          <div role="alert" className="alert alert-success">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>مع السلامة يا زعيـــــــــــــم</span>
+          </div>
+        }
+      } catch (error: any) {
+        <div role="alert" className="alert alert-error">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>{error.data || "Logout failed"}</span>
+        </div>
+      }
       logout();
       router.push("/login");
       router.refresh();
@@ -167,7 +186,6 @@ const Navbar = () => {
                 {userIconList.map((item) => (
                   <li key={item.id} className="list-none">
                     {item.title === "Logout" ? (
-                      // لو العنصر هو Logout، استخدم زرار بدل Link
                       <button
                         onClick={() => handleAction(item)}
                         className="w-full flex items-center gap-4 p-3 hover:bg-red-50 rounded-lg cursor-pointer group transition-colors text-red-500"
