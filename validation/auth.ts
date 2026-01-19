@@ -27,4 +27,10 @@ export const loginSchema = z.object({
   password: z.string().min(1, "كلمة المرور مطلوبة"),
 });
 
+export const forgetPasswordSchema = z.object({
+  contact: z.string().min(1, "الإيميل أو الهاتف مطلوب"),
+});
+
+export type ForgetPasswordInput = z.infer<typeof forgetPasswordSchema>;
+
 export type LoginInput = z.infer<typeof loginSchema>;

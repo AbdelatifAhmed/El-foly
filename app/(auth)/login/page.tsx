@@ -78,7 +78,9 @@ const LoginContent = () => {
               disabled={isSubmitting}
               className='btn bg-(--primary-color) border-(--primary-color) text-white hover:bg-transparent hover:text-(--primary-color) transition-colors'
               >{isSubmitting ? "Logging in..." : "Log In"}</button>
+              <Link href="/forget-password">
               <p className='text-lg text-(--primary-color) underline cursor-pointer '>Forget Password ? </p>
+              </Link>
             </div>
         </form>
         <p className="mt-4 ">Don&apos;t have an Account ? <span>

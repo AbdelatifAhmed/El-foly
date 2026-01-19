@@ -10,7 +10,7 @@ const BestSellingSec = () => {
         <p className="head-line">Best Selling Products</p>
         <Button Title="View All" />
       </div>
-      <div className="flex flex-wrap lg:flex-nowrap gap-10 mt-5">
+      <div className="grid grid-cols-2 lg:flex lg:flex-nowrap gap-1 mt-5">
         {BestSellingProducts.map((item: CardType) => (
         <Card
           key={item.id}

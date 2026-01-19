@@ -7,7 +7,7 @@ import React from "react";
 const Carousel = () => {
   return (
     // تم إضافة snap-x للتنقل السلس على الموبايل
-    <div className="carousel rounded-box w-full h-[300px] md:h-[400px] lg:h-[450px] shadow-xl">
+    <div className="carousel rounded-box w-full h-75 md:h-100 lg:h-112 shadow-xl">
       
       {/* Slide Item Helper Function or Repeated Pattern */}
       {[
@@ -53,7 +53,7 @@ const Carousel = () => {
 
           {/* صورة المنتج */}
           <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
-            <div className="relative w-full h-full max-h-[200px] md:max-h-full flex justify-center">
+            <div className="relative w-full h-full max-h-50 md:max-h-full flex justify-center">
               <Image
                 src={slide.img}
                 alt="Hero Product"
