@@ -76,8 +76,8 @@ const SignupPage = () => {
             {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
             <div className="flex flex-col gap">
 
-              <button disabled={isSubmitting} type="submit">
-                <Button Title="Create Account" />
+              <button disabled={isSubmitting} type="submit" className="w-full bg-(--primary-color) py-3 px-4 text-white rounded-lg  cursor-pointer hover:bg-(--primary-color)/90">
+                Sign up 
               </button>
 
               <button  className="w-full mt-4 py-3 px-4 border border-gray-300 rounded-lg text-lg

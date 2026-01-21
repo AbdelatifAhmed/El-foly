@@ -10,8 +10,7 @@ export const signupSchema = z.object({
     return isEmail || isPhone;
   }, {
     message: "Please enter a valid email or an 11-digit phone number",
-  }),
-
+  }), 
   password: z.string()
     .min(8, "Password must be at least 8 characters")
     .regex(/[A-Z]/, "Must contain at least one uppercase letter")

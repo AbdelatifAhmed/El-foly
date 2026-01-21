@@ -7,6 +7,7 @@ import { useAuthStore } from "@/store/auth.store";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import api from '@/lib/axios';
+import Image from 'next/image';
 
 export default function LoginPage() {
   return (
@@ -47,48 +48,51 @@ const LoginContent = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center width-full ">
-       <div className="mb-6 flex flex-col items-center justify-center">
-        <h3 className="text-4xl font-bold tracking-[0.2em]">Login to El-Foly</h3>
+    <div className="flex flex-col items-center width-full mt-10">
+      <div className='w-full flex justify-center items-center'>
+        <Image src="images/elfoly-logo.svg" alt="Logo El-Foly" width={200} height={200} />
+      </div>
+      <div className="mb-6 flex flex-col items-center justify-center">
+        <h3 className="text-3xl lg:text-4xl font-bold tracking-[0.2em]">Login to El-Foly</h3>
         <p className="text-lg">Sign in to continue!</p>
-       </div>
-       {serverError && (
+      </div>
+      {serverError && (
         <div className="alert alert-error mb-4 shadow-sm py-2">
           <span className='text-white'>{serverError}</span>
         </div>
       )}
-        <form className="w-full flex flex-col gap-10 pr-4" onSubmit={handleSubmit(onSubmit)}>
-            <input 
-            {...register("contact")}
-            placeholder="Email or Phone"
-            className="w-full border-b border-black  text-lg focus:outline-none focus:border-(--primary-color) "
-            />
-            {errors.contact && <span className="text-red-500 text-xs">{errors.contact.message}</span>}
-            <input 
-            {...register("password")}
-            type="password"
-            placeholder="Password"
-            className="w-full border-b border-black  text-lg focus:outline-none  focus:border-(--primary-color)"
-            
-            />
-            {errors.password && <span className="text-red-500 text-xs">{errors.password.message}</span>}
-            <div className="flex justify-between items-center">
-              <button
-              type="submit"
-              disabled={isSubmitting}
-              className='btn bg-(--primary-color) border-(--primary-color) text-white hover:bg-transparent hover:text-(--primary-color) transition-colors'
-              >{isSubmitting ? "Logging in..." : "Log In"}</button>
-              <Link href="/forget-password">
-              <p className='text-lg text-(--primary-color) underline cursor-pointer '>Forget Password ? </p>
-              </Link>
-            </div>
-        </form>
-        <p className="mt-4 ">Don&apos;t have an Account ? <span>
-          <Link href="/signup" className=" underline">
-          Sign up
+      <form className="w-full flex flex-col gap-10 pr-4" onSubmit={handleSubmit(onSubmit)}>
+        <input
+          {...register("contact")}
+          placeholder="Email or Phone"
+          className="w-full border-b border-black  text-lg focus:outline-none focus:border-(--primary-color) "
+        />
+        {errors.contact && <span className="text-red-500 text-xs">{errors.contact.message}</span>}
+        <input
+          {...register("password")}
+          type="password"
+          placeholder="Password"
+          className="w-full border-b border-black  text-lg focus:outline-none  focus:border-(--primary-color)"
+
+        />
+        {errors.password && <span className="text-red-500 text-xs">{errors.password.message}</span>}
+        <div className="flex justify-between items-center">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className='btn bg-(--primary-color) border-(--primary-color) text-white hover:bg-transparent hover:text-(--primary-color) transition-colors'
+          >{isSubmitting ? "Logging in..." : "Log In"}</button>
+          <Link href="/forget-password">
+            <p className='text-lg text-(--primary-color) underline cursor-pointer '>Forget Password ? </p>
           </Link>
-          </span>
-        </p>
+        </div>
+      </form>
+      <p className="mt-4 ">Don&apos;t have an Account ? <span>
+        <Link href="/signup" className=" underline">
+          Sign up
+        </Link>
+      </span>
+      </p>
     </div>
   )
 }

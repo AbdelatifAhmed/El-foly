@@ -2,24 +2,18 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import api from "@/lib/axios";
-import { Lock, ShieldCheck, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { Lock, ShieldCheck, Loader2 } from "lucide-react";
+import Toast from "../common/toast";
+import { changePasswordSchema } from "@/validation/passwordChange";
 
-// 1. Validation Schema
-const passwordSchema = z.object({
-  new_password: z.string().min(8, "كلمة السر يجب أن تكون 8 رموز على الأقل"),
-  confirm_password: z.string()
-}).refine((data) => data.new_password === data.confirm_password, {
-  message: "كلمات السر غير متطابقة",
-  path: ["confirm_password"],
-});
+
 
 const SecurityTab = () => {
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
-    resolver: zodResolver(passwordSchema),
+    resolver: zodResolver(changePasswordSchema),
   });
 
   const showNotification = (message: string, type: 'success' | 'error') => {
@@ -29,7 +23,11 @@ const SecurityTab = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      await api.put('/change-password', { password: data.new_password });
+      await api.put('auth/change-password',
+         { current_password: data.current_password,
+          new_password: data.new_password
+          },
+      );
       showNotification("تم تحديث كلمة السر بنجاح! ✅", "success");
       reset();
     } catch (error: any) {
@@ -41,12 +39,7 @@ const SecurityTab = () => {
     <section className="animate-in fade-in duration-500">
       {/* --- Toast Notification --- */}
       {toast && (
-        <div className="toast toast-top toast-end z-100">
-          <div className={`alert ${toast.type === 'success' ? 'alert-success' : 'alert-error'} text-white shadow-lg`}>
-            {toast.type === 'success' ? <CheckCircle2 size={20} /> : <AlertCircle size={20} />}
-            <span>{toast.message}</span>
-          </div>
-        </div>
+        <Toast type={toast.type} message={toast.message} />
       )}
 
       {/* --- Header Section --- */}
@@ -66,24 +59,35 @@ const SecurityTab = () => {
         {/* Left Side: Password Form */}
         <div className="lg:col-span-2">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="form-control">
-              <label className="label font-semibold text-gray-700">New Password</label>
+            <div className="flex flex-col gap-2">
+              <label className="label font-semibold text-gray-700">Current Password</label>
+              <input
+                type="password"
+                {...register("current_password")}
+                placeholder="••••••••"
+                className={`border p-3 rounded-xl focus:ring-2 focus:ring-primary outline-none ${errors.current_password ? 'input-error' : ''}`}
+              />
+              {errors.current_password && <span className="text-error text-xs mt-1">{errors.current_password.message as string}</span>}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="label font-semibold text-gray-700"> New Password</label>
               <input
                 type="password"
                 {...register("new_password")}
                 placeholder="••••••••"
-                className={`input input-bordered w-full rounded-xl focus:ring-2 focus:ring-primary ${errors.new_password ? 'input-error' : ''}`}
+                className={`border p-3 rounded-xl focus:ring-2 focus:ring-primary outline-none${errors.new_password ? 'input-error' : ''}`}
               />
               {errors.new_password && <span className="text-error text-xs mt-1">{errors.new_password.message as string}</span>}
             </div>
 
-            <div className="form-control">
+            <div className="flex flex-col gap-2">
               <label className="label font-semibold text-gray-700">Confirm New Password</label>
               <input
                 type="password"
                 {...register("confirm_password")}
                 placeholder="••••••••"
-                className={`input input-bordered w-full rounded-xl focus:ring-2 focus:ring-primary ${errors.confirm_password ? 'input-error' : ''}`}
+                className={`border p-3 rounded-xl focus:ring-2 focus:ring-primary outline-none${errors.confirm_password ? 'input-error' : ''}`}
               />
               {errors.confirm_password && <span className="text-error text-xs mt-1">{errors.confirm_password.message as string}</span>}
             </div>

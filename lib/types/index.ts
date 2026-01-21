@@ -64,3 +64,9 @@ export interface WishlistState {
   removeFromWishlist: (id: string | number) => void;
   toggleWishlist: (product: CardType) => void;
 }
+
+
+export type toastType = {
+    message: string,
+    type?: 'success' | 'error' 
+}

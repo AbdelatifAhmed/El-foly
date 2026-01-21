@@ -1,5 +1,7 @@
 'use client';
+import Toast from "@/components/common/toast";
 import api from "@/lib/axios";
+import { toastType } from "@/lib/types";
 import { forgetPasswordSchema, ForgetPasswordInput } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -13,12 +15,14 @@ const ForgetPasswordPage = () => {
     resolver: zodResolver(forgetPasswordSchema),
   });
 
+  const[toast, setToast] =useState<'success' | 'error'>();
+
   const onSubmit = async (data: ForgetPasswordInput) => {
-    alert(data.contact);
     try {
-     const response = await api.post('/auth/forget-password', { email: data.contact });
-        alert(response.data.message);
-    //   router.push('/login');
+     const response = await api.post('/auth/forgot-password', { email: data.contact });
+      response.status === 200 ? setToast('success') : setToast('error');
+       <Toast type={toast} message={response.data.message} />
+      router.push('/login');
     } catch (error: any) {
       alert(error.response?.data?.message || "حدث خطأ أثناء إرسال كلمة السر");
     }
@@ -27,8 +31,8 @@ const ForgetPasswordPage = () => {
   return (
     <div className="flex flex-col items-center width-full">
       <div className="mb-6 flex flex-col items-center justify-center">
-        <h3 className="text-4xl font-bold tracking-[0.2em]">Forget Password</h3>
-        <p className="text-lg">Enter your email to receive a password reset link</p>
+        <h3 className="text-2xl lg:text-4xl font-bold tracking-[0.2em]">Forget Password</h3>
+        <p className="text-sm lg:text-lg">Enter your email to receive a password reset link</p>
       </div>
       <form className="w-full flex flex-col gap-10 pr-4" onSubmit={handleSubmit(onSubmit)}>
         <input

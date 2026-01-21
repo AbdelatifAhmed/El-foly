@@ -3,28 +3,29 @@ import { useState, useEffect, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
+import api from "@/lib/axios";
+import Toast from "@/components/common/toast";
 
 const verifySchema = z.object({
   code: z.string().length(6, "الكود يجب أن يتكون من 6 أرقام"),
 });
 
-export default function LoginPage() {
+export default function VerifyPage() {
   return (
     <Suspense fallback={<span className="loading loading-ring loading-lg"></span>}>
-      <VerifyPageContent />
+      <VerifyPageContent path=''/>
     </Suspense>
   );
 }
 
 
-const VerifyPageContent = () => {
+export const VerifyPageContent = ({path}: {path: string}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
 
-  const [timeLeft, setTimeLeft] = useState(60); // 60 ثانية
+  const [timeLeft, setTimeLeft] = useState(60); 
   const [canResend, setCanResend] = useState(false);
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
@@ -41,13 +42,12 @@ const VerifyPageContent = () => {
       setTimeLeft((prev) => prev - 1);
     }, 1000);
 
-    return () => clearInterval(timer); // تنظيف الذاكرة عند مغادرة الصفحة
+    return () => clearInterval(timer); 
   }, [timeLeft]);
 
-  // --- دالة التأكيد (Verify) ---
   const onSubmit = async (data: { code: string }) => {
     try {
-      const response = await axios.post('https://elfolystore.alkyall.com/api/auth/verify-email', {
+      const response = await api.post('auth/verify-email', {
         email,
         code: data.code
       });
@@ -63,13 +63,15 @@ const VerifyPageContent = () => {
     if (!canResend) return;
 
     try {
-      await axios.post('https://elfolystore.alkyall.com/api/auth/verify-reset-code', { email });
-      alert("تم إعادة إرسال الكود لبريدك الإلكتروني");
+     const res = await api.post(`/auth/${path}`, { email });
+      if (res.data.status === 200) {
+        <Toast type="success" message="تم إعادة إرسال الكود لبريدك الإلكتروني" />
+      }
       
       setTimeLeft(60);
       setCanResend(false);
     } catch (error: any) {
-      alert("فشل إعادة الإرسال، حاول لاحقاً");
+        <Toast type="error" message="فشل إعادة الإرسال، حاول لاحقاً" /> 
     }
   };
 

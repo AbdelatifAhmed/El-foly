@@ -13,7 +13,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isLoading: true, // ابدأ بـ true
   setAuth: (user, token) => {
-    Cookies.set('auth_token', token, { expires: 7 });
+    Cookies.set('auth_token', token, { expires: 1 });
     set({ user, isLoading: false });
   },
   setUser: (user) => set({ user, isLoading: false }),
