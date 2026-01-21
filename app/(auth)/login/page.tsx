@@ -64,15 +64,16 @@ const LoginContent = () => {
       <form className="w-full flex flex-col gap-10 pr-4" onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register("contact")}
+          autoFocus
           placeholder="Email or Phone"
-          className="w-full border-b border-black  text-lg focus:outline-none focus:border-(--primary-color) "
+          className="border p-3 rounded-xl  focus:ring-primary outline-none focus:border-(--primary-color) focus:border-2 "
         />
         {errors.contact && <span className="text-red-500 text-xs">{errors.contact.message}</span>}
         <input
           {...register("password")}
           type="password"
           placeholder="Password"
-          className="w-full border-b border-black  text-lg focus:outline-none  focus:border-(--primary-color)"
+          className="border p-3 rounded-xl  focus:ring-primary outline-none focus:border-(--primary-color) focus:border-2"
 
         />
         {errors.password && <span className="text-red-500 text-xs">{errors.password.message}</span>}

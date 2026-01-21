@@ -47,30 +47,31 @@ const SignupPage = () => {
         <h3 className="text-4xl font-bold tracking-[0.2em]">Create an Account</h3>
         <p className="text-lg">Sign up to get started!</p>
        </div>
-        <form className="w-full flex flex-col gap-10 pr-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="w-full flex flex-col gap-5 pr-4" onSubmit={handleSubmit(onSubmit)}>
             <input 
             {...register("fName")}
             placeholder="First Name"
-            className="w-full border-b border-black text-lg focus:outline-none  focus:border-(--primary-color)" 
+            autoFocus
+            className="border p-3 rounded-xl  focus:ring-primary outline-none focus:border-(--primary-color) focus:border-2 " 
             />
             {errors.fName && <span className="text-red-500 text-sm">{errors.fName.message}</span>}
             <input 
             {...register("lName")}
             placeholder="Last Name"
-            className="w-full border-b border-black text-lg focus:outline-none  focus:border-(--primary-color)" 
+            className="border p-3 rounded-xl  focus:ring-primary outline-none focus:border-(--primary-color) focus:border-2" 
             />
             {errors.lName && <span className="text-red-500 text-sm">{errors.lName.message}</span>}
             <input 
             {...register("contact")}
             placeholder="Email or Phone"
-            className="w-full border-b border-black  text-lg focus:outline-none  focus:border-(--primary-color)"
+            className="border p-3 rounded-xl  focus:ring-primary outline-none focus:border-(--primary-color) focus:border-2"
             
             />
             {errors.contact && <span className="text-red-500 text-sm">{errors.contact.message}</span>}
             <input 
             {...register("password")}
             placeholder="Password"
-            className="w-full border-b border-black  text-lg focus:outline-none  focus:border-(--primary-color)"
+            className="border p-3 rounded-xl  focus:ring-primary outline-none focus:border-(--primary-color) focus:border-2"
             
             />
             {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
