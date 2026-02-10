@@ -2,9 +2,24 @@
 
 import Card from "@/components/common/card";
 import { templateImages } from "@/constant/constants";
+import { useAllProducts } from "@/hooks/useAllProducts";
+import { Product } from "@/lib/types";
 
 
 export default function ProductsPage() {
+    const { products , isLoading , error} = useAllProducts()
+    if(isLoading) {
+        <div className="flex items-center justify-center mt-20">
+            <div className="loading loading-ring loading-lg "></div>;
+        </div>
+    }
+
+    if(error) {
+        return <div>Error loading products</div>
+    }
+    products.map((item: any) => console.log(item))
+    
+
     return (
         <div className="container mx-auto px-4 py-20 min-h-screen">
             {/* Breadcrumbs */}
@@ -28,7 +43,7 @@ export default function ProductsPage() {
                 {/* Products Grid */}
                 <div className="flex-1">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {templateImages.map((item) => (
+                        {products.map((item : Product) => (
                             <Card key={item.id} {...item} />
                         ))}
                     </div>

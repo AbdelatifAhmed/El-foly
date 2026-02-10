@@ -12,8 +12,7 @@ import  { getWindowDimensions } from "@/hooks/useWindowDimensions ";
 
 export default function CategorySlider() { 
 
-    const { width } = getWindowDimensions();
-
+  const { width } = getWindowDimensions();
   const [visibleCount, setVisibleCount] = useState<number>(5); // always show 5 items
   useEffect(() => {
     if (width < 780) {
@@ -89,7 +88,7 @@ export default function CategorySlider() {
                 <div
                   className={`flex flex-col items-center justify-center w-36 h-36 rounded-full shadow-lg transition-all duration-300 ${
                     isActive
-                      ? `bg-[var(--primary-color)] text-white scale-110 -translate-y-2 ring-4 ring-green-200/40`
+                      ? `bg-(--primary-color) text-white scale-110 -translate-y-2 ring-4 ring-green-200/40`
                       : "bg-white text-gray-700"
                   }`}
                 >

@@ -1,8 +1,6 @@
 import { toastType } from "@/lib/types"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
 
-
-
 const Toast = ({type, message}: toastType)  => {
 
   return (
@@ -11,8 +9,8 @@ const Toast = ({type, message}: toastType)  => {
             {type === 'success' ? <CheckCircle2 size={20} /> : <AlertCircle size={20} />}
             <span>{message}</span>
           </div>
-        </div>
+    </div>
   )
 }
 
-export default Toast
+export default Toast;

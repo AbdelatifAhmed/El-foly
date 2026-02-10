@@ -9,17 +9,42 @@ export interface ImageItem {
   description?: string;
 }
 
-export type CardType = {
-  id:  number;
-  title: string;
-  price: number;
-  image: string;
-  isNew?: boolean;
-  vocher?: number;
-  rating?: number;
-  ratingCount?: number;
-  isWishlistPage?: boolean;
-};
+export interface Product {
+    id: string;
+    product_name: string;
+    is_new: boolean;
+    main_image: string;
+    starting_price: number;
+    has_discount: boolean;
+    discount_type: string | null;
+    save_amount: string;
+    discount_value: string | null;
+    is_flash_sale: boolean;
+    total_variants: number;
+    has_stock: boolean;
+    stock_quantity: number;
+    available_colors: string[];
+    available_storage: string[];
+    brand: {
+        id: string;
+        name: string;
+    };
+    category: {
+        id: string;
+        name: string;
+    };
+}
+
+
+export interface CartItem {
+    id: string;
+    title: string; 
+    price: number;
+    image: string;
+    quantity: number;
+    color?: string;
+    storage?: string;
+}
 
 export interface UserIcon {
   id: number;
@@ -28,26 +53,17 @@ export interface UserIcon {
   path?: string;
 }
 
-export interface CartItem {
-  id: number ;
-  title: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
 
 export interface CartStore {
-  cartItems: CartItem[];
-  isOpen: boolean;
-
-  toggleCart: () => void;
-  addToCart: (item: Omit<CartItem, "quantity">) => void;
-  removeFromCart: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
-  clearCart: () => void;
-
-  totalItems: () => number;
-  totalPrice: () => number;
+    cartItems: CartItem[];
+    isOpen: boolean;
+    toggleCart: () => void;
+    addToCart: (product: Product) => void; 
+    removeFromCart: (id: string) => void;
+    updateQuantity: (id: string, quantity: number) => void;
+    clearCart: () => void;
+    totalItems: () => number;
+    totalPrice: () => number;
 }
 
 export interface Category  {
@@ -59,10 +75,10 @@ export interface Category  {
 
 
 export interface WishlistState {
-  wishlist: CardType[];
-  addToWishlist: (product: CardType) => void;
+  wishlist: Product[];
+  addToWishlist: (product: Product) => void;
   removeFromWishlist: (id: string | number) => void;
-  toggleWishlist: (product: CardType) => void;
+  toggleWishlist: (product: Product) => void;
 }
 
 

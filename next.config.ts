@@ -4,10 +4,16 @@ const nextConfig: NextConfig = {
  images: {
     remotePatterns: [
       {
-        protocol: 'https', // Or 'http' if applicable
-        hostname: 'image.daisyui.com', // Replace with the hostname of your external image source
-        port: '', // Leave empty unless a specific port is required
-        pathname: '/images/**', // Adjust the path as needed, use '**' for any subdirectories
+        protocol: 'https', 
+        hostname: 'image.daisyui.com', 
+        port: '',
+        pathname: '/images/**', 
+      },
+      {
+        protocol: 'https', 
+        hostname: 'elfolystore.alkyall.com', 
+        port: '', 
+        pathname: '/images/**', 
       },
     ],
   },

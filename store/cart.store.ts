@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CartStore } from '@/lib/types';
+import { CartItem, CartStore } from '@/lib/types';
 
 export const useCartStore = create<CartStore>()(
   persist(
@@ -10,16 +10,26 @@ export const useCartStore = create<CartStore>()(
 
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
 
-      addToCart: (newItem) => set((state) => {
-        const existingItem = state.cartItems.find(item => item.id === newItem.id);
+      addToCart: (product) => set((state) => {
+        const existingItem = state.cartItems.find(item => item.id === product.id);
+        
         if (existingItem) {
           return {
             cartItems: state.cartItems.map(item =>
-              item.id === newItem.id ? { ...item, quantity: item.quantity + 1 } : item
+              item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
             ),
           };
         }
-        return { cartItems: [...state.cartItems, { ...newItem, quantity: 1 }] };
+
+        const newItem: CartItem = {
+          id: product.id,
+          title: product.product_name,
+          price: product.starting_price,
+          image: product.main_image,
+          quantity: 1
+        };
+
+        return { cartItems: [...state.cartItems, newItem] };
       }),
 
       removeFromCart: (id) => set((state) => ({
@@ -36,7 +46,7 @@ export const useCartStore = create<CartStore>()(
 
       totalItems: () => get().cartItems.reduce((total, item) => total + item.quantity, 0),
 
-      totalPrice: () => get().cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
+      totalPrice: () => get().cartItems.reduce((total, item) => total + (item.price * item.quantity), 0),
     }),
     {
       name: 'cart-storage',
