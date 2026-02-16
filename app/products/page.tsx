@@ -17,9 +17,7 @@ export default function ProductsPage() {
     if(error) {
         return <div>Error loading products</div>
     }
-    products.map((item: any) => console.log(item))
     
-
     return (
         <div className="container mx-auto px-4 py-20 min-h-screen">
             {/* Breadcrumbs */}
@@ -42,7 +40,7 @@ export default function ProductsPage() {
 
                 {/* Products Grid */}
                 <div className="flex-1">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {products.map((item : Product) => (
                             <Card key={item.id} {...item} />
                         ))}

@@ -3,6 +3,7 @@ import AllImageSwiper from '../UI/AllImageSwiper'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const OurProductSec = () => {
+  
   return (
     <div>
         <p className="title-line">Our Products</p>

@@ -23,7 +23,12 @@ export interface Product {
     total_variants: number;
     has_stock: boolean;
     stock_quantity: number;
-    available_colors: string[];
+    available_colors: [
+      {
+        name:string,
+        hex_code:string,
+      }
+    ];
     available_storage: string[];
     brand: {
         id: string;

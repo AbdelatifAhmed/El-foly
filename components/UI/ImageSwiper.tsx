@@ -5,13 +5,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import Card from "../common/card";
-import { templateImages } from "../../constant/constants";
+import { useFlashSales } from "@/hooks/useFlashSales";
+import { Product } from "@/lib/types";
+
 export default function ImageSwiper() {
+  const { flashSales , isLoading, error} = useFlashSales();
+  if (isLoading) return <div>Loading...</div>;
+  if (error) console.log(error);
   return (
     <Swiper
-      // install Swiper modules
       modules={[Navigation, A11y]}
-      
       navigation={{
         nextEl: ".today-swiper-next",
         prevEl: ".today-swiper-prev",
@@ -33,17 +36,10 @@ export default function ImageSwiper() {
 
       }}
     >
-      {templateImages.map((item) => (
+      {flashSales.map((item : Product) => (
         <SwiperSlide key={item.id} className="py-5">
           <Card
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            image={item.image}
-            isNew={item.isNew}
-            vocher={item.vocher}
-            rating={item.rating}
-            ratingCount={item.ratingCount}
+            {...item}
           />
         </SwiperSlide>
       ))}

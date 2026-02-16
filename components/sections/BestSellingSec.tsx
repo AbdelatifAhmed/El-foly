@@ -1,8 +1,12 @@
-import { CardType } from "@/lib/types";
-import {BestSellingProducts} from "../../constant/constants";
 import Card from "../common/card";
 import Button from "../common/Button";
+import { useBestSellings } from "@/hooks/useBestSellings";
+import { Product } from "@/lib/types";
 const BestSellingSec = () => {
+  const {BestSelling , isLoading , error } = useBestSellings()
+  if (isLoading) return <p>Loading...</p>;
+  if (error) console.log(error);
+  
   return (
     <>
       <p className="title-line">This month</p>
@@ -11,17 +15,10 @@ const BestSellingSec = () => {
         <Button Title="View All" />
       </div>
       <div className="grid grid-cols-2 lg:flex lg:flex-nowrap gap-1 mt-5">
-        {BestSellingProducts.map((item: CardType) => (
+        {BestSelling.map((item: Product) => (
         <Card
+          {...item}
           key={item.id}
-          id={item.id}
-          title={item.title}
-          price={item.price}
-          image={item.image}
-          isNew={item.isNew}
-          vocher={item.vocher}
-          rating={item.rating}
-          ratingCount={item.ratingCount}
         />
       ))}
       </div>
