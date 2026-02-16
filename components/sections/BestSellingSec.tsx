@@ -1,3 +1,4 @@
+'use client';
 import Card from "../common/card";
 import Button from "../common/Button";
 import { useBestSellings } from "@/hooks/useBestSellings";

@@ -1,5 +1,5 @@
 'use client';
-import { Eye, Heart, ShoppingCart, Trash2 } from "lucide-react";
+import { Eye, Heart, ShoppingCart, Star, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/types"; // استيراد النوع الجديد من ملفك
@@ -25,7 +25,8 @@ const Card = (props: CardProps) => {
         has_stock,
         available_colors,
         available_storage,
-        isWishlistPage
+        isWishlistPage,
+        rating
     } = props;
 
     const addToCart = useCartStore((state) => state.addToCart);
@@ -89,16 +90,21 @@ const Card = (props: CardProps) => {
                 </button>
             </figure>
 
-            {/* تفاصيل المنتج */}
             <div className="p-4 ">
-                <div className="mb-2 flex justify-between ">
-                    <div className="mb-1 text-[10px] uppercase tracking-wider text-gray-400 font-bold">
-                        {brand?.name || "Generic"}
+                <div className="flex justify-between">
+                    <div className="flex items-center gap-1">
+                        <span className="flex items-center gap-1">{rating.average} <Star size={16} fill="orange" stroke="orange" /></span>
+                        <span>({rating.total_reviews} Reviews)</span>
                     </div>
                     <div className={` text-xs rounded-full  p-1 ${has_stock ? "text-green-500   bg-green-200" : "text-red-500   bg-red-200"}`} >
                         {has_stock ? "in stock" : "out stock"}
                     </div>
                 </div>
+                    <div className="mb-1 text-[10px] uppercase tracking-wider text-gray-400 font-bold">
+                        {brand?.name || "Generic"}
+                    </div>
+
+
 
                 <h3 className="font-bold text-gray-800 text-base truncate mb-1 group-hover:text-primary transition-colors">
                     {product_name}
@@ -140,7 +146,7 @@ const Card = (props: CardProps) => {
 
                 </div>}
 
-                
+
             </div>
         </div>
     );

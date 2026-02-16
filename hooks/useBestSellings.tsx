@@ -1,5 +1,6 @@
+'use client';
 import { useState, useEffect } from "react";
-import {  getBestSellingProducts, getOurProducts } from '@/lib/API';
+import {  getBestSellingProducts } from '@/lib/API';
 
 export const useBestSellings = () => {
   const [BestSelling, setBestSelling ] = useState([]);

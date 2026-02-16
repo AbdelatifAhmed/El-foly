@@ -38,6 +38,10 @@ export interface Product {
         id: string;
         name: string;
     };
+    rating : {
+      average: number,
+      total_reviews: number
+    }
 }
 
 

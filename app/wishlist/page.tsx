@@ -2,6 +2,7 @@
 import Button from "@/components/common/Button";
 import Card from "@/components/common/card";
 import { useWishlistStore } from "@/store/wishlist.store";
+import { Heart } from "lucide-react";
 import Link from "next/link";
 
 export default function WishlistPage() {
@@ -18,6 +19,7 @@ export default function WishlistPage() {
 
             {wishlist.length === 0 ? (
                 <div className="text-center py-20">
+                    <Heart className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                     <p className="text-gray-500 mb-6">Your wishlist is empty.</p>
                 </div>
             ) : (
