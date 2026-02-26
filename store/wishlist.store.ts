@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CardType } from '@/lib/types';
+import {  Product } from '@/lib/types';
 
 interface WishlistState {
-  wishlist: CardType[];
-  toggleWishlist: (product: CardType) => void;
-  removeFromWishlist: (id: number) => void;
+  wishlist: Product[];
+  toggleWishlist: (product: Product) => void;
+  removeFromWishlist: (id: string) => void;
 }
 
 export const useWishlistStore = create<WishlistState>()(
