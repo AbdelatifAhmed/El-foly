@@ -129,10 +129,10 @@
   }
 
   .title-line {
-    @apply text-base text-[var(--primary-color)] font-bold  flex items-center;
+    @apply text-base text-(--primary-color) font-bold  flex items-center;
   }
   .title-line::before {
-    @apply content-[''] block w-5 h-10 bg-[var(--primary-color)] rounded mr-5;
+    @apply content-[''] block w-5 h-10 bg-(--primary-color) rounded mr-5;
   }
   .head-line {
     @apply text-2xl font-bold text-black my-2 tracking-wide lg:tracking-wider lg:text-5xl lg:my-6 ;
@@ -141,7 +141,7 @@
 
 @layer components {
   .navbar-text {
-    @apply text-2xl font-bold text-black hover:text-[var(--primary-color)] hover:underline;
+    @apply text-2xl font-bold text-black hover:text-(--primary-color) hover:underline;
   }
 
   .active-link {

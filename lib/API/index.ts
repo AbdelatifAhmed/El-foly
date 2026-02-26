@@ -8,8 +8,8 @@ export const getAllCategories = async () => {
   const res = await api.get("/categories");
   return res.data.data; 
 };
-export const getAllProducts = async () => {
-  const res = await api.get("/products/get-products");
+export const getAllProducts = async (url : string = '') => {
+  const res = await api.get(`/products/get-products${url ? `?${url}` : ''}`);
   return res.data.data; 
 };
 export const getOurProducts = async () => {
@@ -22,6 +22,18 @@ export const getBestSellingProducts = async () => {
 };
 export const getFlashSales = async () => {
   const res = await api.get("/discounts/flash-sales");
+  return res.data.data; 
+};
+export const getSingleProduct = async (id : string) => {
+  const res = await api.get(`/products/get-product/${id}`);
+  return res.data.data; 
+};
+export const getCategories = async () => {
+  const res = await api.get(`/categories`);
+  return res.data.data; 
+};
+export const getBrands = async () => {
+  const res = await api.get(`/brands`);
   return res.data.data; 
 };
 

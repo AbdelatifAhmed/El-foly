@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Product } from "@/lib/types"; // استيراد النوع الجديد من ملفك
 import { useCartStore } from "@/store/cart.store";
 import { useWishlistStore } from "@/store/wishlist.store";
-import { start } from "repl";
 
 interface CardProps extends Product {
     isWishlistPage?: boolean;

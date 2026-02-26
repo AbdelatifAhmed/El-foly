@@ -76,7 +76,7 @@ export default function CartPage() {
                         </div>
                       </td>
                       <td className="hidden md:table-cell font-medium text-gray-600">
-                        ${item.price.toFixed(2)}
+                        ${item?.price.toFixed(2)}
                       </td>
                       <td>
                         <div className="flex items-center border border-gray-200 rounded-lg w-fit bg-white">
@@ -113,7 +113,7 @@ export default function CartPage() {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-gray-500">
                   <span>Subtotal</span>
-                  <span className="font-semibold text-gray-800">${subtotal.toFixed(2)}</span>
+                  <span className="font-semibold text-gray-800">${subtotal?.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span>Shipping Estimate</span>
@@ -123,12 +123,12 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span>Tax Estimate (14%)</span>
-                  <span className="font-semibold text-gray-800">${tax.toFixed(2)}</span>
+                  <span className="font-semibold text-gray-800">${tax?.toFixed(2)}</span>
                 </div>
                 <div className="divider opacity-50"></div>
                 <div className="flex justify-between items-end">
                   <span className="text-lg font-bold text-gray-800">Order Total</span>
-                  <span className="text-3xl font-black text-primary">${finalTotal.toFixed(2)}</span>
+                  <span className="text-3xl font-black text-primary">${finalTotal?.toFixed(2)}</span>
                 </div>
               </div>
 

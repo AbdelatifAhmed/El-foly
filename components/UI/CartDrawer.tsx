@@ -19,7 +19,7 @@ const CartDrawer = () => {
 
   return (
    
-    <div className="fixed inset-0 z-[100] flex justify-end">
+    <div className="fixed inset-0 z-100 flex justify-end">
       
      
       <div
@@ -48,19 +48,19 @@ const CartDrawer = () => {
             <div className="flex flex-col items-center justify-center h-full text-gray-400">
               <ShoppingCart className="w-16 h-16 mb-4 opacity-50" />
               <p className="text-lg font-medium">Your cart is empty</p>
-              <button onClick={toggleCart} className="mt-6 btn bg-[var(--primary-color)]/90 hover:bg-[var(--primary-color)] border text-white btn-sm rounded-full px-6">
+              <button onClick={toggleCart} className="mt-6 btn bg-(--primary-color)/90 hover:bg-(--primary-color) border text-white btn-sm rounded-full px-6">
                 Continue Shopping
               </button>
             </div>
           ) : (
             <ul className="space-y-6">
-              {cartItems.map((item) => (
-                <li key={item.id} className="flex gap-4 py-4 border-b border-gray-100 last:border-b-0">
+              {cartItems?.map((item) => (
+                <li key={item?.id} className="flex gap-4 py-4 border-b border-gray-100 last:border-b-0">
                   {/* صورة المنتج */}
-                  <div className="relative w-20 h-20 rounded-xl overflow-hidden border border-gray-100 bg-gray-50 flex-shrink-0">
+                  <div className="relative w-20 h-20 rounded-xl overflow-hidden border border-gray-100 bg-gray-50 shrink-0">
                     <Image
-                      src={item.image}
-                      alt={item.title}
+                      src={item?.image}
+                      alt={item?.title}
                       fill
                       className="object-contain p-2"
                     />
@@ -68,16 +68,16 @@ const CartDrawer = () => {
 
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-800 line-clamp-2">{item.title}</h3>
+                      <h3 className="text-sm font-semibold text-gray-800 line-clamp-2">{item?.title}</h3>
                       <p className="text-sm font-bold text-primary mt-1">
-                        ${item.price.toFixed(2)}
+                        ${item?.price?.toFixed(2)}
                       </p>
                     </div>
 
                     <div className="flex items-center justify-between mt-3">
                       <div className="flex items-center border border-gray-200 rounded-full bg-white">
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item?.id, item?.quantity - 1)}
                           className="p-1.5 hover:bg-gray-100 rounded-l-full disabled:opacity-50 transition-colors"
                           disabled={item.quantity <= 1}
                         >
@@ -85,14 +85,14 @@ const CartDrawer = () => {
                         </button>
                         <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item?.id, item?.quantity + 1)}
                           className="p-1.5 hover:bg-gray-100 rounded-r-full transition-colors"
                         >
                           <Plus className="w-4 h-4 text-gray-600" />
                         </button>
                       </div>
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(item?.id)}
                         className="p-2 hover:bg-red-50 rounded-full group transition-colors"
                       >
                         <Trash2 className="w-5 h-5 text-gray-400 group-hover:text-red-500" />
@@ -105,7 +105,7 @@ const CartDrawer = () => {
           )}
         </div>
 
-        {cartItems.length > 0 && (
+        {cartItems?.length > 0 && (
           <div className="p-6 border-t border-gray-100 bg-gray-50">
             <div className="flex justify-between items-center mb-4">
               <span className="text-base font-medium text-gray-600">Subtotal:</span>
@@ -121,7 +121,7 @@ const CartDrawer = () => {
               >
                 View Cart
               </Link>
-              <button className="btn bg-[var(--primary-color)]/90 hover:bg-[var(--primary-color)] border  text-white btn-block">Checkout</button>
+              <button className="btn bg-(--primary-color)/90 hover:bg-(--primary-color) border  text-white btn-block">Checkout</button>
             </div>
             <p className="text-xs text-center text-gray-500 mt-3">
               Shipping & taxes calculated at checkout.
