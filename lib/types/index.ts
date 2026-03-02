@@ -144,7 +144,7 @@ export interface ProductDetails extends Product {
 export interface CartItem {
   id: string;
   title: string;
-  price: number;
+  price: number ;
   image: string;
   quantity: number;
   color?: string;
@@ -163,7 +163,7 @@ export interface CartStore {
   cartItems: CartItem[];
   isOpen: boolean;
   toggleCart: () => void;
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product , price: number) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;

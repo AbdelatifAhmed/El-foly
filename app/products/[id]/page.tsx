@@ -24,7 +24,6 @@ const ProductPage = () => {
     const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
     const wishlist = useWishlistStore((state) => state.wishlist);
 
-    // تعيين القيم الافتراضية عند تحميل المنتج
     useMemo(() => {
         if (product) {
             setSelectedColor(product.available_options.colors[0]?.id);
@@ -68,11 +67,10 @@ const ProductPage = () => {
         );
     }
 
-    // صورة المنتج (استخدام الصورة الرئيسية أو صورة من الصور المتاحة)
     const mainImage = product.images[0] || "/placeholder.png";
 
     return (
-        <div className="container mx-auto px-4 py-10 lg:py-20">
+        <div className="container mx-auto px-4 py-10 lg:py-20 mt-10">
             <div className="flex flex-col lg:flex-row gap-12">
                 
                 {/* 1. Images Section */}
@@ -182,8 +180,8 @@ const ProductPage = () => {
                         
                         <button 
                             disabled={!activeVariant?.in_stock}
-                            onClick={() => addToCart( product)}
-                            className="px-10 py-3 bg-black text-white font-bold rounded-md hover:bg-gray-800 transition-all active:scale-95 flex-1 disabled:bg-gray-400"
+                            onClick={() => addToCart( product , activeVariant?.final_price ?? 0)}
+                            className="px-10 py-3 bg-(--primary-color) text-white font-bold rounded-md hover:bg-(--primary-color)/90 cursor-pointer transition-all active:scale-95 flex-1 disabled:bg-gray-400 disabled:cursor-not-allowed"
                         >
                             Add to Cart
                         </button>
@@ -217,19 +215,19 @@ const ProductPage = () => {
             </div>
 
             {/* Specifications Table */}
-            {/* <div className="mt-20">
+            <div className="mt-20">
                 <h2 className="text-2xl font-bold mb-6">Technical Specifications</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {Object.entries(product?.specifications).map(([key, value]: any) => (
+                    {product.specifications ? Object.entries(product?.specifications).map(([key, value]: any) => (
                         value && typeof value !== 'object' && (
                             <div key={key} className="flex justify-between p-4 border-b">
                                 <span className="text-gray-500 capitalize">{key.replace('_', ' ')}</span>
                                 <span className="font-bold">{String(value)}</span>
                             </div>
                         )
-                    ))}
+                    )) : <div className="col-span-full text-center text-gray-500 py-10">No specifications available.</div>}
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 };

@@ -145,6 +145,6 @@
   }
 
   .active-link {
-    @apply text-[var(--primary-color)];
+    @apply text-(--primary-color);
   }
 }

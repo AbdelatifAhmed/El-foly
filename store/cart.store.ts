@@ -10,7 +10,7 @@ export const useCartStore = create<CartStore>()(
 
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
 
-      addToCart: (product) => set((state) => {
+      addToCart: (product , price) => set((state) => {
         const existingItem = state.cartItems.find(item => item.id === product.id);
 
         if (existingItem) {
@@ -24,7 +24,7 @@ export const useCartStore = create<CartStore>()(
         const newItem: CartItem = {
           id: product.id,
           title: product.product_name,
-          price: product.starting_price,
+          price: price,
           image: product.main_image,
           quantity: 1
         };

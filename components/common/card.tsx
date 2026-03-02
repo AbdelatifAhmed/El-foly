@@ -80,7 +80,7 @@ const Card = (props: CardProps) => {
 
                 {/* Quick Add to Cart Button */}
                 <button
-                    onClick={() => { addToCart(props); toggleCart(); }}
+                    onClick={() => { addToCart(props , props.starting_price); toggleCart(); }}
                     className="absolute bottom-0 left-0 w-full bg-gray-900 text-white py-3 text-sm font-bold flex items-center justify-center gap-2 transition-transform duration-300 hover:bg-primary z-10
             lg:transform lg:translate-y-full lg:group-hover:translate-y-0"
                 >
