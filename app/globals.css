@@ -46,9 +46,9 @@
 }
 
 :root {
-  --primary : #17a26a;
-  --secondary : #171717;
-  --third : #f8f9fa;
+  --primary: #17a26a;
+  --secondary: #171717;
+  --third: #f8f9fa;
   --primary-color: #17a26a;
   --secondary-color: #171717;
   --third-color: #f8f9fa;
@@ -135,7 +135,15 @@
     @apply content-[''] block w-5 h-10 bg-(--primary-color) rounded mr-5;
   }
   .head-line {
-    @apply text-2xl font-bold text-black my-2 tracking-wide lg:tracking-wider lg:text-5xl lg:my-6 ;
+    @apply text-2xl font-bold text-black my-2 tracking-wide lg:tracking-wider lg:text-5xl lg:my-6;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 10px;
   }
 }
 

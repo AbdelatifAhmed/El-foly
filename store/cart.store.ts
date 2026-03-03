@@ -10,13 +10,13 @@ export const useCartStore = create<CartStore>()(
 
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
 
-      addToCart: (product , price) => set((state) => {
+      addToCart: (product , price , quantity = 1 , image) => set((state) => {
         const existingItem = state.cartItems.find(item => item.id === product.id);
 
         if (existingItem) {
           return {
             cartItems: state.cartItems.map(item =>
-              item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+              item.id === product.id ? { ...item, quantity: quantity ? item.quantity + quantity : item.quantity + 1 } : item
             ),
           };
         }
@@ -26,7 +26,7 @@ export const useCartStore = create<CartStore>()(
           title: product.product_name,
           price: price,
           image: product.main_image,
-          quantity: 1
+          quantity: quantity || 1 ,
         };
 
         return { cartItems: [...state.cartItems, newItem] };

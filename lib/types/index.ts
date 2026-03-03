@@ -41,7 +41,11 @@ export interface Product {
 }
 
 export interface ProductDetails extends Product {
-  images: string[];
+  images: [ {
+    url: string;
+    id?: string;
+    type?: string;
+  }];
   warranty_months: number;
   description: string;
   category: {
@@ -163,7 +167,7 @@ export interface CartStore {
   cartItems: CartItem[];
   isOpen: boolean;
   toggleCart: () => void;
-  addToCart: (product: Product , price: number) => void;
+  addToCart: (product: Product , price: number , quantity: number , image: string) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
