@@ -34,7 +34,7 @@ const ProductPage = () => {
   const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
   const wishlist = useWishlistStore((state) => state.wishlist);
   const [mainImage, setMainImage] = useState<string>("");
-
+  
   useEffect(() => {
     if (product?.images && product.images.length > 0) {
       setMainImage(product.images[0].url);
@@ -267,7 +267,7 @@ const ProductPage = () => {
             <button
               disabled={!activeVariant?.in_stock}
               onClick={() =>
-                addToCart(product, activeVariant?.final_price ?? 0 , quantity, product?.images[0]?.url ?? "")
+                addToCart(product, activeVariant?.final_price ?? 0 , quantity, mainImage ?? "")
               }
               className="px-5 py-3 bg-(--primary-color) text-white font-bold rounded-md hover:bg-(--primary-color)/90 cursor-pointer transition-all active:scale-95 flex-1 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >

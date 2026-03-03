@@ -15,6 +15,9 @@ const CartDrawer = () => {
     totalPrice,
   } = useCartStore();
 
+  console.log('cart url',cartItems[0]?.image);
+  
+
   if (!isOpen) return null;
 
   return (
