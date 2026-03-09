@@ -94,23 +94,28 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="flex items-center gap-8 font-medium">
           <li>
-            <Link href="/" className={`hover:text-primary transition-colors ${pathname === "/" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+            <Link href="/" className={`hover:text-primary transition-colors ${pathname === "/" ? "text-(--primary-color) border-b-2 border-(--primary-color)" : "text-gray-600"}`}>
               Home
             </Link>
           </li>
           <li>
-            <Link href="/about" className={`hover:text-primary transition-colors ${pathname === "/about" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+            <Link href="/products" className={`hover:text-primary transition-colors ${pathname === "/products" ? "text-(--primary-color) border-b-2 border-(--primary-color)" : "text-gray-600"}`}>
+              Products
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className={`hover:text-primary transition-colors ${pathname === "/about" ? "text-(--primary-color) border-b-2 border-(--primary-color)" : "text-gray-600"}`}>
               About
             </Link>
           </li>
           <li>
-            <Link href="/contact" className={`hover:text-primary transition-colors ${pathname === "/contact" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+            <Link href="/contact" className={`hover:text-primary transition-colors ${pathname === "/contact" ? "text-(--primary-color) border-b-2 border-(--primary-color)" : "text-gray-600"}`}>
               Contact
             </Link>
           </li>
           <li>
             {!user &&
-              <Link href="/signup" className={`hover:text-primary transition-colors ${pathname === "/signup" ? "text-primary border-b-2 border-primary" : "text-gray-600"}`}>
+              <Link href="/signup" className={`hover:text-primary transition-colors ${pathname === "/signup" ? "text-(--primary-color) border-b-2 border-(--primary-color)" : "text-gray-600"}`}>
                 Sign Up
               </Link>}
           </li>

@@ -62,9 +62,7 @@ const PersonalInfoTab = () => {
                 <Toast type="error" message={res.data.message || 'Error updating profile'} />
                 throw new Error(res.data.message);
             }
-            if (res.status === 200) {
-                console.log(res);
-                
+            if (res.status === 200) {                
                 <Toast type="success" message={res.data.message} />
                 const token = Cookies.get('auth_token');
                 if (token) {

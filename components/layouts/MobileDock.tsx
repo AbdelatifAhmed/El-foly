@@ -2,46 +2,40 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Tag, Package, ShoppingCart, Heart } from 'lucide-react';
-import { useCartStore } from '@/store/cart.store';
-import { useWishlistStore } from '@/store/wishlist.store';
+
 
 const MobileDock = () => {
   const pathname = usePathname();
-  const { cartItems } = useCartStore(); 
-  const wishlist = useWishlistStore((state) => state.wishlist);
-
-  const hasCartItems = cartItems.length > 0;
-  const hasWishlistItems = wishlist.length > 0;
-
+ 
   return (
     <div className="dock dock-md fixed bottom-0 left-0 right-0 z-100 lg:hidden bg-white/90 backdrop-blur-md border-t border-base-200 shadow-2xl">
 
       {/* Offers */}
-      <Link href="/offers" className={pathname === '/offers' ? 'dock-active' : ''}>
-        <Tag size={22} />
-        <span className="dock-label">Offers</span>
+      <Link href="/offers" className={pathname === '/offers' ? 'border-b-2 border-(--primary-) rounded' : ''}>
+        <Tag size={22} stroke={`${pathname === '/offers' ? 'var(--primary-color)': 'currentColor'}`} />
+        <span className={`dock-label  ${pathname === '/offers' ? 'text-(--primary-color) font-bold'  : ''}`}>Offers</span>
       </Link>
 
       {/* Products */}
-      <Link href="/products" className={pathname === '/products' ? 'dock-active' : ''}>
-        <Package size={22} />
-        <span className="dock-label">Products</span>
+      <Link href="/products" className={pathname === '/products' ? ' border-b-2 border-(--primary-color) rounded' : ''}>
+        <Package size={22}  stroke={`${pathname === '/products' ? 'var(--primary-color)' : 'currentColor'}`}/>
+        <span className={`dock-label  ${pathname === '/products' ? 'text-(--primary-color) font-bold' : ''}`}>Products</span>
       </Link>
 
       {/* Home */}
-      <Link href="/" className={pathname === '/' ? 'dock-active' : ''}>
-        <Home size={22} className="transition-all duration-300" />
-        <span className="dock-label">Home</span>
+      <Link href="/" className={pathname === '/' ? 'border-b-2 border-(--primary-color) rounded' : ''}>
+        <Home size={22} className="transition-all duration-300" stroke={`${pathname === '/' ? 'var(--primary-color)' : 'currentColor'}`}/>
+        <span className={`dock-label  ${pathname === '/' ? 'text-(--primary-color) font-bold' : ''}`}>Home</span>
       </Link>
 
-      <Link href="/wishlist" className={pathname === '/wishlist' ? 'dock-active text-primary' : ''}>
-          <Heart size={22} />
-        <span className="dock-label">Wishlist</span>
+      <Link href="/wishlist" className={pathname === '/wishlist' ? 'border-b-2 border-(--primary-color) rounded' : ''}>
+          <Heart size={22} stroke={`${pathname === '/wishlist' ? 'var(--primary-color)' : 'currentColor'}`}/>
+        <span className={`dock-label ${pathname === '/wishlist' ? 'text-(--primary-color) font-bold' : ''}`}>Wishlist</span>
       </Link>
 
-      <Link href="/cart" className={pathname === '/cart' ? 'dock-active text-primary' : ''}>
-        <ShoppingCart size={22} />
-        <span className="dock-label">Cart</span>
+      <Link href="/cart" className={pathname === '/cart' ? 'border-b-2 border-(--primary-color) rounded' : ''}>
+        <ShoppingCart size={22} stroke={`${pathname === '/cart' ? 'var(--primary-color)' : 'currentColor'}`}/>
+        <span className={`dock-label ${pathname === '/cart' ? 'text-(--primary-color) font-bold ' : ''}`}>Cart</span>
       </Link>
 
     </div>
